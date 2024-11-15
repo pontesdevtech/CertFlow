@@ -7,4 +7,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+	<PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
+	<PackageReference Include="ExcelDataReader" Version="3.7.0" />
+	<PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0" />
+    <PackageReference Include="itext" Version="8.0.5" />
+    <PackageReference Include="itext7.bouncy-castle-adapter" Version="8.0.5" />
+  </ItemGroup>
+
 </Project>
