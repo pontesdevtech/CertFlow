@@ -1,5 +1,4 @@
-﻿using E_Docs.Domain.Interfaces.Entities;
-
+﻿
 namespace E_Docs.Domain.Entities;
 public class Certificado
 {

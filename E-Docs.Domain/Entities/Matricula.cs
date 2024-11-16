@@ -14,6 +14,8 @@ public class Matricula
     public string Curso { get; set; }
     public string Email { get; set; }
 
+    public Certificado Certificado { get; set; } = null!;
+
     /// <summary>
     /// Sobrescrição do método "ToString()" para exibição das informações do documento após leitura.
     /// </summary>

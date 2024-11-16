@@ -13,9 +13,12 @@ public static class CertificadoService
     /// <param name="diretorio">Endereço da pasta onde se encontram os arquivos</param>
     /// <param name="matriculas">Lista de matrículas para identificação dos certificados</param>
     /// <returns></returns>
-    public static (List<Certificado>certificados, List<string>logs) RenomearDocumentos(string diretorio, List<Matricula>matriculas)
+    public static (List<Matricula>matriculas, List<string> logsSucesso, List<string>logsErro) RenomearDocumentos(string diretorio, List<Matricula>alunos)
     {
         List<Certificado> documentos = LerDocumentos(diretorio);
+        List<Matricula> matriculas = [];
+        Matricula matricula;
+        List<string> sucessos = [];
         List<string> erros = [];
 
         foreach (var documento in documentos)
@@ -28,31 +31,43 @@ public static class CertificadoService
                 string senha;
 
                 // Se o nome do aluno identificado no certificado existir na lista de matrículas:
-                if(matriculas.FirstOrDefault(x => x.Nome == documento.NomeAluno) != null)
+                if(alunos.FirstOrDefault(x => x.Nome == documento.NomeAluno) != null)
                 {
                     // Atribui o valor do identificador (RA ou CPF do aluno) à variável senha
-                    senha = matriculas.FirstOrDefault(x => x.Nome.Equals(documento.NomeAluno)).Identificador;
-                    // Cria uma cópia do arquivo PDF atribuindu-le um novo nome (mesmo nome, apenas acrescentando a palavra [PROTEGIDO]) e define as senhas do ususário e
-                    // do usuário mestre para proteção do arquivo
+                    senha = alunos.FirstOrDefault(x => x.Nome.Equals(documento.NomeAluno)).Identificador;
+                    // Cria uma cópia do arquivo PDF atribuindu-le um novo nome (mesmo nome, apenas acrescentando a palavra [PROTEGIDO]) e define as senhas do ususário e do usuário mestre para proteção do arquivo */
                     DefinirSenha($"{diretorio}{documento.NomeAluno}.pdf", $"{diretorio}[PROTEGIDO] {documento.NomeAluno}.pdf", senha, "Fiepa@123456789@");
+
+                    // Remove o arquivo original deixando apenas o novo arquivo renomeado e protegido por senha
+                    RemoverArquivoOriginal($"{diretorio}{documento.NomeAluno}.pdf");
+
+                    // Atualiza o nome do documento no objeto
+                    string nomeAntigoArquivo = documento.NomeArquivo;
+                    documento.NomeArquivo = $"[PROTEGIDO] {documento.NomeAluno}.pdf";
+                    sucessos.Add($"SUCESSO: O arquivo '{nomeAntigoArquivo}' foi renomeado para '{documento.NomeArquivo}'.");
+
+                    // Localiza a matrícula na lista recebida
+                    matricula = alunos.FirstOrDefault(x => x.Nome.Equals(documento.NomeAluno));
+                    // Adiciona o certificado à matrícula
+                    matricula.Certificado = documento;
+                    // Adiciona a matrícula na lista de matrículas 
+                    matriculas.Add(matricula);
                 }
                 // caso contrário:
                 else
                 {
-                    // Registra o logue do erro apresentado
-                    erros.Add($"ERRO: O nome do(a) aluno(a) {documento.NomeAluno} não foi encontrado na lista de matrículas.");
+                    // Registra o log do erro apresentado
+                    erros.Add($"ERRO: Não foi possível preparar o certificado!{Environment.NewLine}" +
+                              $"O nome do(a) aluno(a) {documento.NomeAluno} não foi encontrado na lista de matrículas.");
                 }
-                // Remove o arquivo original deixando apenas o novo arquivo renomeado e protegido por senha
-                RemoverArquivoOriginal($"{diretorio}{documento.NomeAluno}.pdf");
-                // Atualiza o nome do documento no objeto
-                documento.NomeArquivo = $"[PROTEGIDO] {documento.NomeAluno}.pdf";
+                
             }
             catch (Exception)
             {
                 throw;
             }
         }
-            return (documentos, erros);
+            return (matriculas, sucessos, erros);
     }
 
     /// <summary>
@@ -166,11 +181,6 @@ public static class CertificadoService
             {
                 // Apaga o arquivo
                 File.Delete(diretorioArquivo);
-                Console.WriteLine("Arquivo apagado com sucesso!");
-            }
-            else
-            {
-                Console.WriteLine("O arquivo não foi encontrado.");
             }
         }
         catch (Exception ex)
