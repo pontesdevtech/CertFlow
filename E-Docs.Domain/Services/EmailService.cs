@@ -17,7 +17,7 @@ public static class EmailService
     /// <param name="corpoEmail">Mensagem do email</param>
     /// <param name="anexo">Diretório do arquivo que será anexado</param>
     /// <returns>Retorna "true" se ocorrer tudo conforme esperado e "false", caso seja lançada alguma exceção</returns>
-    public static bool EnviarEmail(ServidorEmail servidor, string email, string? cc, string? cco, string assunto, string corpoEmail, string anexo)
+    public static string EnviarEmail(ServidorEmail servidor, string email, string? cc, string? cco, string assunto, string corpoEmail, string anexo)
     {
         try
         {
@@ -25,12 +25,33 @@ public static class EmailService
             var mensagem = PrepararMensagem(servidor, email, cc, cco, assunto, corpoEmail, anexo);
             // Invoca o método de para envio da mensagem via smtp
             EnviarEmailViaSMTP(servidor, mensagem);
+            return $"SUCESSO: Email enviado com sucesso para {mensagem.To}";
+        }
+        catch (FormatException ex)
+        {
+            // Exceção lançada em caso de formato inválido de email 
+            return $"ERRO: Formato de endereço de email inválido: {ex.Message}";
+        }
+        catch (SmtpFailedRecipientsException ex)
+        {
+            // Exceção lançada em caso de email inválido ou inexistente
+            string erros = string.Empty;
+            foreach (SmtpFailedRecipientException innerEx in ex.InnerExceptions)
+            {
+                erros += $"ERRO: Falha ao enviar email para {innerEx.FailedRecipient}: {innerEx.Message}";
+            }
+            return erros;
+        }
+        catch (SmtpException ex)
+        {
+            // Exceção lançada em caso de problema com a comunicaçao com o smtp
+            return $"ERRO: Erro SMTP: {ex.Message} (Status: {ex.StatusCode})";
         }
         catch (Exception ex)
         {
-            return false;
+            // Exceção lançada em casos diferentes dos levantados acima
+            return $"ERRO: Erro inesperado: {ex.Message}";
         }
-        return true;
     }
 
     /// <summary>
