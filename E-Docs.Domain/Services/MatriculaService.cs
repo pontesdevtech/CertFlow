@@ -38,8 +38,10 @@ public class MatriculaService
                     var matricula = new Matricula
                                         (
                                             nome: linha["ALUNO"].ToString(),
-                                            identificador: linha["RA"].ToString(),
+                                            ra: linha["RA"].ToString(),
+                                            cpf: linha["RA"].ToString(),
                                             curso: linha["CURSO"].ToString(),
+                                            turma: linha["TURMA"].ToString(),
                                             email: linha["EMAIL"].ToString()
                                         );
                     // Adiciona cada objeto na lista.

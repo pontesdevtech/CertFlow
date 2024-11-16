@@ -34,7 +34,7 @@ public static class CertificadoService
                 if(alunos.FirstOrDefault(x => x.Nome == documento.NomeAluno) != null)
                 {
                     // Atribui o valor do identificador (RA ou CPF do aluno) à variável senha
-                    senha = alunos.FirstOrDefault(x => x.Nome.Equals(documento.NomeAluno)).Identificador;
+                    senha = alunos.FirstOrDefault(x => x.Nome.Equals(documento.NomeAluno)).Ra;
                     // Cria uma cópia do arquivo PDF atribuindu-le um novo nome (mesmo nome, apenas acrescentando a palavra [PROTEGIDO]) e define as senhas do ususário e do usuário mestre para proteção do arquivo */
                     DefinirSenha($"{diretorio}{documento.NomeAluno}.pdf", $"{diretorio}[PROTEGIDO] {documento.NomeAluno}.pdf", senha, "Fiepa@123456789@");
 
