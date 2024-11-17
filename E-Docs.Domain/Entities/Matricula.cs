@@ -1,6 +1,15 @@
 ﻿namespace E_Docs.Domain.Entities;
 public class Matricula
 {
+    /// <summary>
+    /// Método construtor da classe
+    /// </summary>
+    /// <param name="nome">"Nome do Aluno" obtido na lista de matrícula</param>
+    /// <param name="ra">"Registro Acadêmico (RA)" obtido na lista de matrícula</param>
+    /// <param name="cpf">"CPF" obtido na lista de matrícula</param>
+    /// <param name="email">"Email" obtido na lista de matrícula</param>
+    /// <param name="curso">"Curso" obtido na lista de matrícula</param>
+    /// <param name="turma">"Coódigo da Turma" obtido na lista de matrícula</param>
     public Matricula(string nome, string ra, string cpf, string email, string curso, string turma)
     {
         Nome = nome;
@@ -11,6 +20,7 @@ public class Matricula
         Turma = turma;
     }
 
+    //Atributos da classe
     public string Nome { get; set; }
     public string Ra { get; set; }
     public string Cpf { get; set; }
@@ -18,7 +28,9 @@ public class Matricula
     public string Curso { get; set; }
     public string Turma { get; set; }
 
-    public Certificado Certificado { get; set; } = null!;
+    /*REMOVER
+     * public Certificado Certificado { get; set; } = null!;
+     */
 
     /// <summary>
     /// Sobrescrição do método "ToString()" para exibição das informações do documento após leitura.
