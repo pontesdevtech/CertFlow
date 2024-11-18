@@ -6,7 +6,7 @@ public class Email
     /// </summary>
     /// <param name="emailsDestinatario">Emails do destinatário principal</param>
     /// <param name="emailsEmCopia">Emails em cópia do destinatário</param>
-    /// <param name="emailsEmCopiaOculta"></param>
+    /// <param name="emailsEmCopiaOculta">Emails em cópia oculta do destinatário</param>
     /// <param name="assunto">Assundo do texto</param>
     /// <param name="corpoEmail">Texto do corpo do texto</param>
     /// <param name="anexos">Lista de anxos a serem enviados no texto</param>
