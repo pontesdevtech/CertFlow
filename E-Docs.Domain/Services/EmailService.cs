@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
+using System.Text;
 
 namespace E_Docs.Domain.Services;
 public static class EmailService
@@ -10,92 +11,97 @@ public static class EmailService
     /// Método responsável por chamar os métodos de "preparação da mensagem" e de "envio da mensagem via smtp".
     /// </summary>
     /// <param name="servidor">Objeto que contém as informações do provedor e do usuário de email</param>
-    /// <param name="email">Endereço de email do destinatário</param>
-    /// <param name="cc">Endereco de email do usuário em cópia</param>
-    /// <param name="cco">Endereco de email do usuário em cópia oculta</param>
-    /// <param name="assunto">Texto do assunto do email</param>
-    /// <param name="corpoEmail">Mensagem do email</param>
-    /// <param name="anexo">Diretório do arquivo que será anexado</param>
-    /// <returns>Retorna "true" se ocorrer tudo conforme esperado e "false", caso seja lançada alguma exceção</returns>
-    public static string EnviarEmail(ServidorEmail servidor, string email, string? cc, string? cco, string assunto, string corpoEmail, string anexo)
+    /// <param name="email">Objeto que contém as informações dos destinatários, da mensagem e de seus anexos</param>
+    /// <returns>Retorna uma mensagem de sucesso ao final da operação, caso ocorra conforme esperado</returns>
+    /// <exception cref="ArgumentOutOfRangeException">Lançada quando um argumento está fora do intervalo permitido.</exception>
+    /// <exception cref="ArgumentNullException">Lançada quando um argumento necessário é nulo.</exception>
+    /// <exception cref="ArgumentException">Lançada quando um argumento é inválido ou não esperado.</exception>
+    /// <exception cref="PathTooLongException">Lançada quando o caminho do arquivo excede o limite de caracteres permitido.</exception>
+    /// <exception cref="UnauthorizedAccessException">Lançada quando o acesso ao arquivo ou diretório é negado devido a permissões insuficientes.</exception>
+    /// <exception cref="NotSupportedException">Lançada quando uma operação não é suportada.</exception>
+    /// <exception cref="FormatException">Lançada quando ocorre um erro de formato ao tentar converter ou processar dados.</exception>
+    /// <exception cref="ObjectDisposedException">Lançada quando uma operação é realizada em um objeto que já foi descartado.</exception>
+    /// <exception cref="InvalidOperationException">Lançada quando uma operação é realizada em um estado inválido para o objeto.</exception>
+    /// <exception cref="SmtpFailedRecipientsException">Lançada quando a entrega de um e-mail falha para múltiplos destinatários.</exception>
+    /// <exception cref="SmtpFailedRecipientException">Lançada quando a entrega de um e-mail falha para um destinatário específico.</exception>
+    /// <exception cref="SmtpException">Lançada quando ocorre um erro relacionado ao envio de um e-mail via SMTP.</exception>
+    /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
+    public static string EnviarEmail(ServidorEmail servidor, Email email)
     {
         try
         {
-            // Carrega a vbariável com o retorno do método "Preparar Mensagem"
-            var mensagem = PrepararMensagem(servidor, email, cc, cco, assunto, corpoEmail, anexo);
+            // Carrega a variável com o retorno do método "Preparar Mensagem"
+            var mensagem = PrepararMensagem(servidor, email);
             // Invoca o método de para envio da mensagem via smtp
             EnviarEmailViaSMTP(servidor, mensagem);
-            return $"SUCESSO: Email enviado com sucesso para {mensagem.To}";
+            //Retorna uma mensagem personalizada com os emails de destinatário principal
+            string destinatarios = string.Empty;
+            foreach (var destinatario in mensagem.To) destinatarios = $"{destinatario.User}; ";
+            return $"SUCESSO: Email enviado com sucesso para {destinatarios}";
         }
-        catch (FormatException ex)
-        {
-            // Exceção lançada em caso de formato inválido de email 
-            return $"ERRO: Formato de endereço de email inválido: {ex.Message}";
-        }
-        catch (SmtpFailedRecipientsException ex)
-        {
-            // Exceção lançada em caso de email inválido ou inexistente
-            string erros = string.Empty;
-            foreach (SmtpFailedRecipientException innerEx in ex.InnerExceptions)
-            {
-                erros += $"ERRO: Falha ao enviar email para {innerEx.FailedRecipient}: {innerEx.Message}";
-            }
-            return erros;
-        }
-        catch (SmtpException ex)
-        {
-            // Exceção lançada em caso de problema com a comunicaçao com o smtp
-            return $"ERRO: Erro SMTP: {ex.Message} (Status: {ex.StatusCode})";
-        }
-        catch (Exception ex)
-        {
-            // Exceção lançada em casos diferentes dos levantados acima
-            return $"ERRO: Erro inesperado: {ex.Message}";
-        }
+        catch (ArgumentOutOfRangeException) { throw; }
+        catch (ArgumentNullException) { throw; }
+        catch (ArgumentException) { throw; }
+        catch (PathTooLongException) { throw; }
+        catch (UnauthorizedAccessException) { throw; }
+        catch (NotSupportedException) { throw; }
+        catch (FormatException) { throw; }
+        catch (ObjectDisposedException) { throw; }
+        catch (InvalidOperationException) { throw; }
+        catch (SmtpFailedRecipientsException) { throw; }
+        catch (SmtpFailedRecipientException) { throw; }
+        catch (SmtpException) { throw; }
+        catch (Exception) { throw; }
     }
 
     /// <summary>
     /// Método responsável por preparar a mensagem que será enviada posteriormente
     /// </summary>
     /// <param name="servidor">Objeto que contém as informações do provedor e do usuário de email</param>
-    /// <param name="email">Endereço de email do destinatário</param>
-    /// <param name="cc">Endereco de email do usuário em cópia</param>
-    /// <param name="cco">Endereco de email do usuário em cópia oculta</param>
-    /// <param name="assunto">Texto do assunto do email</param>
-    /// <param name="corpoEmail">Mensagem do email</param>
-    /// <param name="anexo">Diretório do arquivo que será anexado</param>
+    /// <param name="email">Objeto que contém as informações dos destinatários, da mensagem e de seus anexos</param>
     /// <returns>Retorna um objeto "MailMessage()"</returns>
-    /// <exception cref="Exception"></exception>
-    private static MailMessage PrepararMensagem(ServidorEmail servidor, string email, string? cc, string? cco, string assunto, string corpoEmail, string anexo)
+    /// <exception cref="ArgumentNullException">Lançada quando um argumento necessário é nulo.</exception>
+    /// <exception cref="ArgumentException">Lançada quando um argumento é inválido ou não esperado.</exception>
+    /// <exception cref="PathTooLongException">Lançada quando o caminho do arquivo excede o limite de caracteres permitido.</exception>
+    /// <exception cref="UnauthorizedAccessException">Lançada quando o acesso ao arquivo ou diretório é negado devido a permissões insuficientes.</exception>
+    /// <exception cref="NotSupportedException">Lançada quando uma operação não é suportada.</exception>
+    /// <exception cref="FormatException">Lançada quando ocorre um erro de formato ao tentar converter ou processar dados.</exception>
+    /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
+    private static MailMessage PrepararMensagem(ServidorEmail servidor, Email email)
     {
-        var mail = new MailMessage();
+        MailMessage mail = new();
 
         try
         {
             // Configura as propriedades do objeto MailMessage
             if (servidor.Provedor != null && servidor.Usuario != null && servidor.Senha != null) mail.From = new MailAddress(servidor.Usuario);
-            mail.To.Add(ValidarEmail(email));
-            if (cc != null) mail.CC.Add(ValidarEmail(cc));
-            if (cco != null) mail.Bcc.Add(ValidarEmail(cco));
-            mail.Subject = assunto;
-            mail.Body = corpoEmail;
+            foreach (var to in email.EmailsDestinatario) mail.To.Add(ValidarEmail(to));
+            foreach (var cc in email.EmailsEmCopia) mail.CC.Add(ValidarEmail(cc));
+            foreach (var cco in email.EmailsEmCopiaOculta) mail.Bcc.Add(ValidarEmail(cco));
+            mail.Subject = email.Assunto;
+            mail.Body = email.CorpoEmail;
             mail.IsBodyHtml = true;
-            mail.Attachments.Add(PrepararAnexo(anexo));
+            foreach (var anexo in email.Anexos) mail.Attachments.Add(PrepararAnexo(anexo));
+            return mail;
         }
-        catch (Exception ex)
-        {
-            throw new Exception($"ERRO: A preparação da imagem falhou! Message{ex.Message}");
-        }
-
-        return mail;
+        catch (ArgumentNullException) { throw; }
+        catch (ArgumentException) { throw; }
+        catch (PathTooLongException) { throw; }
+        catch (UnauthorizedAccessException) { throw; }
+        catch (NotSupportedException) { throw; }
+        catch (FormatException) { throw; }
+        catch (Exception) { throw; }
     }
 
     /// <summary>
-    /// Método responsável por validar o email
+    /// Método responsável por validar o formato do email
     /// </summary>
     /// <param name="email">Endereço de email que será validado</param>
     /// <returns></returns>
-    /// <exception cref="Exception"></exception>
+    /// <exception cref="ArgumentNullException">Lançada quando um argumento necessário é nulo.</exception>
+    /// <exception cref="ArgumentException">Lançada quando um argumento é inválido ou não esperado.</exception>
+    /// <exception cref="FormatException">Lançada quando ocorre um erro de formato ao tentar converter ou processar dados.</exception>
+    /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
     private static MailAddress ValidarEmail(string email)
     {
         MailAddress ma = null!;
@@ -105,29 +111,45 @@ public static class EmailService
             {
                 ma = new MailAddress(email);
             }
+            return ma;
         }
-        catch (Exception ex)
-        {
-            throw new Exception($"ERRO: O email {email} é inválido! Message{ex.Message}");
-        }
-
-        return ma;
+        catch (ArgumentNullException) { throw; }
+        catch (ArgumentException) { throw; }
+        catch (FormatException) { throw; }
+        catch (Exception) { throw; }
     }
 
     /// <summary>
-    /// Método responsável por preparar s anexos que serão enviados por email
+    /// Método responsável por preparar os anexos que serão enviados por email
     /// </summary>
     /// <param name="anexo">Diretório do arquivo que será anexado</param>
     /// <returns></returns>
-    private static Attachment PrepararAnexo(string anexo)
+    /// <exception cref="ArgumentNullException">Lançada quando um argumento necessário é nulo.</exception>
+    /// <exception cref="ArgumentException">Lançada quando um argumento é inválido ou não esperado.</exception>
+    /// <exception cref="PathTooLongException">Lançada quando o caminho do arquivo excede o limite de caracteres permitido.</exception>
+    /// <exception cref="UnauthorizedAccessException">Lançada quando o acesso ao arquivo ou diretório é negado devido a permissões insuficientes.</exception>
+    /// <exception cref="NotSupportedException">Lançada quando uma operação não é suportada.</exception>
+    /// <exception cref="FormatException">Lançada quando ocorre um erro de formato ao tentar converter ou processar dados.</exception>
+    /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
+    private static Attachment PrepararAnexo(string diretorioArquivo)
     {
-        var data = new Attachment(anexo, MediaTypeNames.Application.Octet);
-        ContentDisposition disposition = data.ContentDisposition;
-        // Carrega as informações de criação, modificação e de leitura do arquivo
-        disposition.CreationDate = File.GetCreationTime(anexo);
-        disposition.ModificationDate = File.GetLastWriteTime(anexo);
-        disposition.ReadDate = File.GetLastAccessTime(anexo);
-        return data;
+        try
+        {
+            var anexo = new Attachment(diretorioArquivo, MediaTypeNames.Application.Octet);
+            ContentDisposition disposition = anexo.ContentDisposition;
+            // Carrega as informações de criação, modificação e de leitura do arquivo
+            disposition.CreationDate = File.GetCreationTime(diretorioArquivo);
+            disposition.ModificationDate = File.GetLastWriteTime(diretorioArquivo);
+            disposition.ReadDate = File.GetLastAccessTime(diretorioArquivo);
+            return anexo;
+        }
+        catch (ArgumentNullException) { throw; }
+        catch (ArgumentException) { throw; }
+        catch (PathTooLongException) { throw; }
+        catch (UnauthorizedAccessException) { throw; }
+        catch (NotSupportedException) { throw; }
+        catch (FormatException) { throw; }
+        catch (Exception) { throw; }
     }
 
     /// <summary>
@@ -135,17 +157,37 @@ public static class EmailService
     /// </summary>
     /// <param name="servidor">Informações do provedor e do usuário do email</param>
     /// <param name="mensagem">Objeto que carregas as configurações da mensagem que será enviada</param>
+    /// <exception cref="ArgumentOutOfRangeException">Lançada quando um argumento está fora do intervalo permitido.</exception>
+    /// <exception cref="ArgumentNullException">Lançada quando um argumento necessário é nulo.</exception>
+    /// <exception cref="ArgumentException">Lançada quando um argumento é inválido ou não esperado.</exception>
+    /// <exception cref="ObjectDisposedException">Lançada quando uma operação é realizada em um objeto que já foi descartado.</exception>
+    /// <exception cref="InvalidOperationException">Lançada quando uma operação é realizada em um estado inválido para o objeto.</exception>
+    /// <exception cref="SmtpFailedRecipientsException">Lançada quando a entrega de um e-mail falha para múltiplos destinatários.</exception>
+    /// <exception cref="SmtpFailedRecipientException">Lançada quando a entrega de um e-mail falha para um destinatário específico.</exception>
+    /// <exception cref="SmtpException">Lançada quando ocorre um erro relacionado ao envio de um e-mail via SMTP.</exception>
+    /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
     private static void EnviarEmailViaSMTP(ServidorEmail servidor, MailMessage mensagem)
     {
         SmtpClient smtpClient = new SmtpClient();
-
-        smtpClient.Host = servidor.Provedor;
-        smtpClient.Port = servidor.Porta;
-        smtpClient.EnableSsl = true;
-        smtpClient.Timeout = 30000; // Timout que 30 segundos
-        smtpClient.UseDefaultCredentials = false;
-        smtpClient.Credentials = new NetworkCredential(servidor.Usuario, servidor.Senha);
-        smtpClient.Send(mensagem);
-        smtpClient.Dispose();
+        try
+        {
+            smtpClient.Host = servidor.Provedor;
+            smtpClient.Port = servidor.Porta;
+            smtpClient.EnableSsl = true;
+            smtpClient.Timeout = 30000; // Timout que 30 segundos
+            smtpClient.UseDefaultCredentials = false;
+            smtpClient.Credentials = new NetworkCredential(servidor.Usuario, servidor.Senha);
+            smtpClient.Send(mensagem);
+            smtpClient.Dispose();
+        }
+        catch (ArgumentOutOfRangeException) { throw; }
+        catch (ArgumentNullException) { throw; }
+        catch (ArgumentException) { throw; }
+        catch (ObjectDisposedException) { throw; }
+        catch (InvalidOperationException) { throw; }
+        catch (SmtpFailedRecipientsException) { throw; }
+        catch (SmtpFailedRecipientException) { throw; }
+        catch (SmtpException) { throw; }
+        catch (Exception) { throw; }
     }
 }
