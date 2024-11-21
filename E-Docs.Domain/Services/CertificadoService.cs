@@ -31,7 +31,11 @@ public static class CertificadoService
 
         try
         {
-            foreach (var certificado in LerCertificados(diretorio, senhaAdmin, matriculas))
+            int contador = 0;
+            string excecoes = string.Empty;
+            var certificadosLeitura = LerCertificados(diretorio, senhaAdmin, matriculas);
+
+            foreach (var certificado in certificadosLeitura)
             {
                 // Renomeia arquivo original.
                 File.Move($"{diretorio}{certificado.NomeArquivo}", $"{diretorio}{certificado.NomeAluno}.pdf");
@@ -41,8 +45,8 @@ public static class CertificadoService
                 // Se o nome do aluno identificado no certificado existir na lista de matrículas se o arquivo ainda não foi criptografado:
                 if(matriculas.FirstOrDefault(x => x.Nome == certificado.NomeAluno) != null)
                 {
-                    if (!certificado.NomeArquivo.Contains("[PROTEGIDO]"))
-                    {
+                    //if (!certificado.NomeArquivo.Contains("[PROTEGIDO]"))
+                    //{
                         // Atribui o valor do identificador (CPF do aluno) à variável senha
                         senha = matriculas.FirstOrDefault(x => x.Nome.Equals(certificado.NomeAluno)).Cpf;
                         // Cria uma cópia do arquivo PDF atribuindu-le um novo nome (mesmo nome, apenas acrescentando a palavra [PROTEGIDO]) e define as senhas do ususário e do usuário mestre para proteção do arquivo
@@ -51,19 +55,14 @@ public static class CertificadoService
                         certificado.NomeArquivo = $"[PROTEGIDO] {certificado.NomeAluno}.pdf";
                         // Adiciona o certificado à lista
                         certificados.Add(certificado);
-                    }
-                    else
-                    {
-                        // Lança uma exceção informando que o arquivo já está criptografado
-                        throw new Exception($"ERRO: O arquivo {certificado.NomeArquivo} já está criptografado");
-                    }
                 }
                 else
                 {
-                    // Lança uma exceção informando que o nome do aluno não foi encontrado na lista de matrículas
-                    throw new Exception($"ERRO: Não foi possível preparar o certificado! O nome do(a) aluno(a) {certificado.NomeAluno} não foi encontrado na lista de matrículas.");
+                    excecoes += $"{Environment.NewLine}   Não foi possível preparar o certificado! O nome do(a) aluno(a) '{certificado.NomeAluno}' não foi encontrado na lista de matrículas.{Environment.NewLine}";
+                    contador++;
                 }
             }
+            if (contador >= certificadosLeitura.Count) throw new Exception();
             return certificados;
         }
         catch (EncoderFallbackException) { throw; }
@@ -95,6 +94,8 @@ public static class CertificadoService
     /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
     private static List<Certificado> LerCertificados(string diretorio, string senhaAdmin, List<Matricula>matriculas)
     {
+        int contador = 0;
+        string excecoes = string.Empty;
         List<Certificado> certificados = [];
 
         try
@@ -110,25 +111,39 @@ public static class CertificadoService
             {
                 foreach (string arquivo in arquivos)
                 {
-                    // Divide o texto do arquivo PDF em linhas e as armazena em um array de linhas
-                    string[] linhasTexto = ExtrairTextoDoPDF(arquivo, senhaAdmin).Split("\n");
+                    if (!arquivo.Contains("[PROTEGIDO]"))
+                    {
+                        // Divide o texto do arquivo PDF em linhas e as armazena em um array de linhas
+                        string[] linhasTexto = ExtrairTextoDoPDF(arquivo, senhaAdmin).Split("\n");
 
-                    // Atribui os valores ao campos do objeto
-                    Certificado certificado = new
-                        (
-                            nomeArquivo: $"{Path.GetFileName(arquivo)}", // Essa configuração armazena apenas o nome do arquivo. Não considera o diretorio completo.
-                            unidade: linhasTexto[1],
-                            nomeAluno: ObterTexto(linhasTexto[2], "conferem à ", " por ter concluído"),
-                            curso: linhasTexto[3],
-                            cargaHoraria: ObterTexto(linhasTexto[4], "com duração de", "\n"),
-                            periodo: ObterTexto(linhasTexto[5], "no período de ", "\n"),
-                            matricula: matriculas.FirstOrDefault(x => x.Nome.Equals(ObterTexto(linhasTexto[2], "conferem à ", " por ter concluído")))
-                        );
-                    // Adiciona cada certificado carregado a lista geral
-                    certificados.Add(certificado);
+                        // Atribui os valores ao campos do objeto
+                        Certificado certificado = new
+                            (
+                                nomeArquivo: $"{Path.GetFileName(arquivo)}", // Essa configuração armazena apenas o nome do arquivo. Não considera o diretorio completo.
+                                unidade: linhasTexto[1],
+                                nomeAluno: ObterTexto(linhasTexto[2], "conferem à ", " por ter concluído"),
+                                curso: linhasTexto[3],
+                                cargaHoraria: ObterTexto(linhasTexto[4], "com duração de", "\n"),
+                                periodo: ObterTexto(linhasTexto[5], "no período de ", "\n"),
+                                matricula: matriculas.FirstOrDefault(x => x.Nome.Equals(ObterTexto(linhasTexto[2], "conferem à ", " por ter concluído")))
+                            );
+                        // Adiciona cada certificado carregado a lista geral
+                        certificados.Add(certificado);
+                    }
+                    else
+                    {
+                        excecoes += $"{Environment.NewLine}   O arquivo '{arquivo}' já está criptografado.";
+                        // Lança uma exceção informando que o arquivo já está criptografado
+                        contador++;
+                    }
                 }
+                if (contador >= arquivos.Length) throw new Exception(excecoes);
+                return certificados;
             }
-            throw new Exception($"ERRO: Não há arquivos no formado PDF no diretório informado. Diretório: {diretorio}");
+            else
+            {
+                throw new Exception($"{Environment.NewLine}   Não há arquivos no formado PDF no diretório informado. Diretório: '{diretorio}.{Environment.NewLine}'");
+            }
         }
         catch (EncoderFallbackException) { throw; }
         catch (ArgumentNullException) { throw; }

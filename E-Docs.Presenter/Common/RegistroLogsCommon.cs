@@ -1,4 +1,5 @@
-﻿using E_Docs.Presenter.DTOs;
+﻿using E_Docs.Presenter.Common.Enums;
+using E_Docs.Presenter.DTOs;
 
 namespace E_Docs.Presenter.Common;
 public class RegistroLogsCommon
@@ -10,7 +11,7 @@ public class RegistroLogsCommon
     /// </summary>
     /// <param name="nomeProcesso">Nome do processo que lançou a exceção</param>     
     /// <param name="processo">Processo que está sendo monitorado pelo objeto que registra os logs</param>
-    internal void MonitorarProcesso(string nomeProcesso, Action processo)
+    internal void MonitorarProcesso(ENomeProcessoCommon nomeProcesso, Action processo)
     {
         try
         {
@@ -18,7 +19,7 @@ public class RegistroLogsCommon
         }
         catch (Exception excecao)
         {
-            var log = new LogDTO(excecao, nomeProcesso);
+            var log = new LogDTO(excecao, nomeProcesso.ToString());
             Logs.Add(log);
         }
     }
@@ -28,7 +29,7 @@ public class RegistroLogsCommon
     /// </summary>
     /// <param name="nomeProcesso">Nome do processo que lançou a exceção</param>     
     /// <param name="processo">Processo que está sendo monitorado pelo objeto que registra os logs</param>
-    internal T? MonitorarProcesso<T>(string nomeProcesso, Func<T> processo)
+    internal T? MonitorarProcesso<T>(ENomeProcessoCommon nomeProcesso, Func<T> processo)
     {
         try
         {
@@ -36,7 +37,7 @@ public class RegistroLogsCommon
         }
         catch (Exception excecao)
         {
-            var log = new LogDTO(excecao, nomeProcesso);
+            var log = new LogDTO(excecao, nomeProcesso.ToString());
             Logs.Add(log);
             return default;
         }

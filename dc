@@ -1,0 +1,59 @@
+[33mcommit af472827cfa71237163ffe5b367d8ea74dc621f1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Mon Nov 18 00:44:15 2024 -0300
+
+    Inclusão das classes de mapeamento de Entidades para DTOs e vice-versa
+
+[33mcommit 365444212fac5ea9e7e872b507aeb8a3d9b854cd[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Mon Nov 18 00:08:57 2024 -0300
+
+    Inclusão dos DTOs para intermediar comunicaçao entre a interface gráfica e o modelo de domínio
+
+[33mcommit 529031b26ded46ba3e1a958688cb104c4df24b76[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Sun Nov 17 23:44:11 2024 -0300
+
+    Ajustes nas classes de serviço para refletir as correções nas entidades
+
+[33mcommit 86d302abc12fd4d4c8049cdc52ef6ef257fbd09f[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Sun Nov 17 19:33:37 2024 -0300
+
+    Ajustes nas entidades do modelo de domínio
+
+[33mcommit 43919ed1fadc4ea6637ae2127d0c31171571240e[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Sat Nov 16 13:35:49 2024 -0300
+
+    Inclusão dos campos 'Cpf' e 'Turma', e alteração do nome do campo 'Identificador' para 'Ra' na entidade 'Matricula'
+
+[33mcommit 50f8b7a09659e6fbc6e97525f5b4112e4fa11e51[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Sat Nov 16 11:54:20 2024 -0300
+
+    Ajuste das exceções de envio de emails lançadas em casos específicos
+
+[33mcommit 6fc106a48b0c4599f214db80ea98b3a1472469fe[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Fri Nov 15 21:49:08 2024 -0300
+
+    Criação da lógica para envio dos documentos por emails
+
+[33mcommit 4ef28941a1dbbf6b146fc0a30491bfdd3c3ed1d2[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Fri Nov 15 02:12:36 2024 -0300
+
+    Criação da lógica para renomear e criptografar os arquivos
+
+[33mcommit 002a10d5a65b7e01c6c6fa12870e2fdf67963727[m
+Author: pontesdevtech <pontesdevtech@outlook.com>
+Date:   Thu Nov 14 21:18:15 2024 -0300
+
+    Inclusão dos projetos no repositório
+
+[33mcommit b22a7b8dc041e57746cb57bd6a1a041e2b52ef34[m
+Author: Tiago Pontes <76593718+T-Pontes@users.noreply.github.com>
+Date:   Thu Nov 14 21:10:31 2024 -0300
+
+    Inclusão do .gitignore no repositório

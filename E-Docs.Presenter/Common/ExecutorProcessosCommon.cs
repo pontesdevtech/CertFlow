@@ -1,4 +1,5 @@
-﻿using E_Docs.Presenter.DTOs;
+﻿using E_Docs.Presenter.Common.Enums;
+using E_Docs.Presenter.DTOs;
 
 namespace E_Docs.Presenter.Common;
 public static class ExecutorProcessosCommon
@@ -10,7 +11,7 @@ public static class ExecutorProcessosCommon
     /// <param name="nomeProcesso">Nome do processo que lançou a exceção</param>     
     /// <param name="processo">Processo que está sendo monitorado pelo objeto que registra os logs</param>
     /// <returns>Retorna o valor do tipo genérico "T" e a lista de logs de erros do processo</returns>
-    public static (T? retorno, List<LogDTO> logs) ExecutarProcesso<T>(string nomeProcesso, Func<T> processo)
+    public static (T? retorno, List<LogDTO> logs) ExecutarProcesso<T>(ENomeProcessoCommon nomeProcesso, Func<T> processo)
     {
         RegistroLogsCommon logs = new();
         var retorno = logs.MonitorarProcesso(nomeProcesso, ()=> processo());
@@ -23,7 +24,7 @@ public static class ExecutorProcessosCommon
     /// <param name="nomeProcesso">Nome do processo que lançou a exceção</param>     
     /// <param name="processo">Processo que está sendo monitorado pelo objeto que registra os logs</param>
     /// <returns>Retorna a lista de logs de erros do processo</returns>
-    public static List<LogDTO> ExecutarProcesso(string nomeProcesso, Action processo)
+    public static List<LogDTO> ExecutarProcesso(ENomeProcessoCommon nomeProcesso, Action processo)
     {
         RegistroLogsCommon logs = new();
         logs.MonitorarProcesso(nomeProcesso, () => processo());

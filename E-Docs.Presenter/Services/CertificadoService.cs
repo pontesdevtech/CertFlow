@@ -1,6 +1,5 @@
 ﻿using E_Docs.Presenter.DTOs;
 using E_Docs.Presenter.Mappings;
-using System.Data;
 
 namespace E_Docs.Presenter.Services;
 public class CertificadoService
@@ -12,10 +11,10 @@ public class CertificadoService
     /// <param name="senhaAdmin">Senha do usuário Admin para manipulação dos arquivos</param>
     /// <param name="matriculas">Lista de matrículas para identificação dos certificados.</param>
     /// <returns>Retorna um DataTable com as informações dos certificados</returns>
-    public static DataTable CarregarCertificados(string diretorio, string senhaAdmin, List<MatriculaDTO> matriculas)
+    public static List<CertificadoDTO> CarregarCertificados(string diretorio, string senhaAdmin, List<MatriculaDTO> matriculas)
     {
         var certificados = Domain.Services.CertificadoService.RenomearCertificados(diretorio, senhaAdmin, MatriculaMap.ConverterListaMatriculasDtoParaListaMatriculas(matriculas));
-        DataTable dt = CertificadoMap.ConverterListaParaDataTable(CertificadoMap.ConverterListaCertificadosParaListaCertificadosDto(certificados));
-        return dt;
+        var certifcadosDto = CertificadoMap.ConverterListaCertificadosParaListaCertificadosDto(certificados);
+        return certifcadosDto;
     }
 }

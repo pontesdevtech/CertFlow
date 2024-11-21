@@ -80,9 +80,9 @@ public static class MatriculaMap
     /// </summary>
     /// <param name="matriculas">Lista de matriculas recebidas por parâmetro</param>
     /// <returns>Retorna um DataTable de matriculas</returns>
-    public static DataTable ConverterListaParaDataTable(List<MatriculaDTO> matriculas)
+    public static DataTable ConverterListaDtoParaDataTable(List<MatriculaDTO> matriculas)
     {
-        DataTable dt = new DataTable();
+        var dt = new DataTable();
 
         // Adicionar colunas baseadas nas propriedades da classe "Matricula"
         dt.Columns.Add("Aluno", typeof(string));

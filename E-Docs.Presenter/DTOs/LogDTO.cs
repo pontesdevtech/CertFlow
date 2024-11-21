@@ -11,22 +11,24 @@ public class LogDTO
     /// <param name="nomeProcesso">Nome do processo que lançou a exceção</param>
     public LogDTO(Exception excecao, string nomeProcesso)
     {
+        Excecao = excecao;
         NomeProcesso = nomeProcesso ?? string.Empty;
         DtCriacao = DateTime.Now;
         TipoExcecao = excecao.GetType();
-        Mensagem = excecao.Message ?? string.Empty;
-        StackTrace = excecao.StackTrace ?? string.Empty;
-        InnerExceptionMessage = excecao.InnerException.Message ?? string.Empty;
-        MensagemUsuario = GerarMensagemParaUsuario(excecao) ?? string.Empty;
+        Mensagem = excecao.Message;
+        StackTrace = excecao.StackTrace?? string.Empty;
+        InnerExceptionMessage = (excecao.InnerException != null) ? excecao.InnerException.Message : string.Empty;
+        MensagemUsuario = GerarMensagemParaUsuario(excecao);
     }
 
     // Atributos da classe
+    private Exception Excecao { get; init; }
     public string NomeProcesso { get; set; }
     public DateTime DtCriacao { get; set; }
     public Type TipoExcecao { get; set; }
     public string Mensagem { get; set; }
     public string StackTrace { get; set; }
-    public string InnerExceptionMessage { get; set; }
+    public string? InnerExceptionMessage { get; set; }
     public string MensagemUsuario { get; set; }
 
     /// <summary>
@@ -42,6 +44,7 @@ public class LogDTO
             ArgumentNullException => "Um valor necessário está ausente. Por favor, verifique e tente novamente.",
             ArgumentOutOfRangeException => "O valor fornecido está fora do intervalo permitido. Verifique e ajuste o valor.",
             ArgumentException => "Há um erro nos parâmetros fornecidos. Verifique as informações e tente novamente.",
+            NullReferenceException => "Um erro inesperado ocorreu ao acessar informações que não estão disponíveis. Verifique se todas as informações necessárias foram fornecidas e tente novamente.",
             PathTooLongException => "O caminho especificado é muito longo. Reduza o comprimento do caminho e tente novamente.",
             DirectoryNotFoundException => "O diretório especificado não foi encontrado. Verifique o caminho e tente novamente.",
             UnauthorizedAccessException => "Você não tem permissão para acessar este recurso. Verifique suas permissões.",
@@ -59,5 +62,27 @@ public class LogDTO
 
     }
 
-
+    public (string titulo, string mensagem, string informacoesBasicas, string informacoesTecnicas) GetMensagem()
+    {
+        var innerException = (Excecao.InnerException != null) ? $"InnerExceptionMessage:{Environment.NewLine}{InnerExceptionMessage}{Environment.NewLine}" : "";
+        var titulo = $"Erro ao executar o processo!";
+        var mensagem = $"Ocorreram erros ao executar o processo {NomeProcesso}. Consulte os 'Detalhes do Erro' para mais informações.";
+        var informacoesBasicas = $"INFORMAÇÕES DO PROCESSO{Environment.NewLine}{Environment.NewLine}" +
+                                 $"Processo: {NomeProcesso}{Environment.NewLine}" +
+                                 $"Data/Hora: {DtCriacao}{Environment.NewLine}" +
+                                 $"Mensagem: {MensagemUsuario}{Environment.NewLine}" +
+                                 $"{Environment.NewLine}{new string('-', 80)}{Environment.NewLine}";
+        var informacoesTecnicas = $"INFORMAÇÕES DO PROCESSO{Environment.NewLine}{Environment.NewLine}" +
+                                  $"Processo: {NomeProcesso}{Environment.NewLine}" +
+                                  $"Data/Hora: {DtCriacao}{Environment.NewLine}" +
+                                  $"{Environment.NewLine}" +
+                                  $"INFORMAÇÕES TÉCNICAS:{Environment.NewLine}{Environment.NewLine}" +
+                                  $"Tipo da Exceção: {TipoExcecao}{Environment.NewLine}" +
+                                  $"Message: {Mensagem}{Environment.NewLine}" +
+                                  $"StackTrace:{Environment.NewLine}{StackTrace}{Environment.NewLine}" +
+                                  $"{innerException}" +
+                                  $"{Environment.NewLine}{new string('-', 80)}{Environment.NewLine}"; 
+        return (titulo, mensagem, informacoesBasicas, informacoesTecnicas);
+               
+    }
 }

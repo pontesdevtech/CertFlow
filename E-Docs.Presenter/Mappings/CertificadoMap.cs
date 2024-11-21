@@ -78,7 +78,7 @@ public static class CertificadoMap
     /// </summary>
     /// <param name="certificados">Lista de certificados recebidas por parâmetro</param>
     /// <returns>Retorna um DataTable de certificados</returns>
-    public static DataTable ConverterListaParaDataTable(List<CertificadoDTO> certificados)
+    public static DataTable ConverterListaDtoParaDataTable(List<CertificadoDTO> certificados)
     {
         DataTable dt = new DataTable();
 
