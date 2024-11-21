@@ -43,7 +43,7 @@ public static class FormatacaoCommon
                 if (dgv.Columns.Contains(dgv.Columns["Unidade"]))
                 {
                     dgv.Columns["Unidade"].Width = 250;
-                    dgv.Columns["Unidade"].Visible = true;
+                    dgv.Columns["Unidade"].Visible = false;
                 }
 
                 if (dgv.Columns.Contains(dgv.Columns["Certificado"]))

@@ -58,7 +58,7 @@ partial class ExcecoesView
         InformacoesTecnicasTXT.Multiline = true;
         InformacoesTecnicasTXT.Name = "InformacoesTecnicasTXT";
         InformacoesTecnicasTXT.ScrollBars = ScrollBars.Both;
-        InformacoesTecnicasTXT.Size = new Size(561, 397);
+        InformacoesTecnicasTXT.Size = new Size(465, 266);
         InformacoesTecnicasTXT.TabIndex = 0;
         InformacoesTecnicasTXT.WordWrap = false;
         // 
@@ -89,7 +89,7 @@ partial class ExcecoesView
         // 
         // ImagemExcecaoIMG
         // 
-        ImagemExcecaoIMG.BackColor = SystemColors.ControlDarkDark;
+        ImagemExcecaoIMG.BackColor = SystemColors.ControlLight;
         ImagemExcecaoIMG.Dock = DockStyle.Left;
         ImagemExcecaoIMG.Location = new Point(5, 21);
         ImagemExcecaoIMG.Name = "ImagemExcecaoIMG";
@@ -148,7 +148,7 @@ partial class ExcecoesView
         InformacoesTecnicasPAG.Location = new Point(4, 24);
         InformacoesTecnicasPAG.Name = "InformacoesTecnicasPAG";
         InformacoesTecnicasPAG.Padding = new Padding(3);
-        InformacoesTecnicasPAG.Size = new Size(567, 403);
+        InformacoesTecnicasPAG.Size = new Size(471, 272);
         InformacoesTecnicasPAG.TabIndex = 1;
         InformacoesTecnicasPAG.Text = "Informações Técnicas";
         InformacoesTecnicasPAG.UseVisualStyleBackColor = true;
@@ -190,6 +190,7 @@ partial class ExcecoesView
         Name = "ExcecoesView";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Erro ao executar o processo";
+        Load += ExcecoesView_Load;
         ExcecaoGBX.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)ImagemExcecaoIMG).EndInit();
         ResumoExcecaoGBX.ResumeLayout(false);

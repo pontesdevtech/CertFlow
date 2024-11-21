@@ -54,7 +54,6 @@ partial class PrincipalView
         BarraFerramentasPrincipalTST = new ToolStrip();
         LogoLBL = new ToolStripLabel();
         toolStripSeparator1 = new ToolStripSeparator();
-        NovoBTN = new ToolStripButton();
         ImportarMatriculasBTN = new ToolStripButton();
         EnviarCertificadosBTN = new ToolStripButton();
         toolStripSeparator2 = new ToolStripSeparator();
@@ -288,7 +287,7 @@ partial class PrincipalView
         // BarraFerramentasPrincipalTST
         // 
         BarraFerramentasPrincipalTST.BackColor = SystemColors.ControlLight;
-        BarraFerramentasPrincipalTST.Items.AddRange(new ToolStripItem[] { LogoLBL, toolStripSeparator1, NovoBTN, ImportarMatriculasBTN, EnviarCertificadosBTN, toolStripSeparator2, ExportarRelatorioCBX });
+        BarraFerramentasPrincipalTST.Items.AddRange(new ToolStripItem[] { LogoLBL, toolStripSeparator1, ImportarMatriculasBTN, EnviarCertificadosBTN, toolStripSeparator2, ExportarRelatorioCBX });
         BarraFerramentasPrincipalTST.Location = new Point(5, 5);
         BarraFerramentasPrincipalTST.Name = "BarraFerramentasPrincipalTST";
         BarraFerramentasPrincipalTST.Size = new Size(778, 33);
@@ -306,15 +305,6 @@ partial class PrincipalView
         // 
         toolStripSeparator1.Name = "toolStripSeparator1";
         toolStripSeparator1.Size = new Size(6, 33);
-        // 
-        // NovoBTN
-        // 
-        NovoBTN.Image = (Image)resources.GetObject("NovoBTN.Image");
-        NovoBTN.ImageTransparentColor = Color.Magenta;
-        NovoBTN.Name = "NovoBTN";
-        NovoBTN.Size = new Size(56, 30);
-        NovoBTN.Text = "Novo";
-        NovoBTN.Click += NovoBTN_Click;
         // 
         // ImportarMatriculasBTN
         // 
@@ -350,13 +340,13 @@ partial class PrincipalView
         // PdfBTN
         // 
         PdfBTN.Name = "PdfBTN";
-        PdfBTN.Size = new Size(100, 22);
+        PdfBTN.Size = new Size(180, 22);
         PdfBTN.Text = "PDF";
         // 
         // XlsxBTN
         // 
         XlsxBTN.Name = "XlsxBTN";
-        XlsxBTN.Size = new Size(100, 22);
+        XlsxBTN.Size = new Size(180, 22);
         XlsxBTN.Text = "XLSX";
         // 
         // PrincipalView
@@ -398,7 +388,6 @@ partial class PrincipalView
     private ToolStrip BarraFerramentasPrincipalTST;
     private ToolStripLabel LogoLBL;
     private ToolStripSeparator toolStripSeparator1;
-    private ToolStripButton NovoBTN;
     private ToolStripButton ImportarMatriculasBTN;
     private ToolStripButton EnviarCertificadosBTN;
     private ToolStripSeparator toolStripSeparator2;
