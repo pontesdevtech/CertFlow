@@ -1,3 +1,6 @@
+using System;
+using System.Windows.Forms;
+
 namespace E_Docs.Views;
 
 internal static class Program

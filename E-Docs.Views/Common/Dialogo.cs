@@ -1,11 +1,14 @@
-﻿namespace E_Docs.Views.Common;
+﻿using System;
+using System.Windows.Forms;
+
+namespace E_Docs.Views.Common;
 internal class Dialogo
 {
     public static string? SelecionarPasta()
     {
         using (FolderBrowserDialog folderBrowser = new FolderBrowserDialog())
         {
-            folderBrowser.Description = "Selecione a pasta de certificados";
+            folderBrowser.Description = "Selecione a pasta de Certificados";
             folderBrowser.ShowNewFolderButton = true;
 
             // Abre o diálogo e verifica se o usuário clicou em "OK"

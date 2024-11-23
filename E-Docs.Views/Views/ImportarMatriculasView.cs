@@ -1,7 +1,11 @@
 ﻿using E_Docs.Presenter.DTOs;
 using E_Docs.Views.Common;
 using E_Docs.Views.Services;
-using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace E_Docs.Views.Views;
 public partial class ImportarMatriculasView : Form
@@ -9,27 +13,11 @@ public partial class ImportarMatriculasView : Form
     public PrincipalView TelaPrincipal { get; set; }
     private List<MatriculaDTO> Matriculas = [];
     private List<CertificadoDTO> Certificados = [];
-    private IConfiguration _configuration = null!;
-    // Carrega as imagens da pasta na raiz do projeto
-    string diretorioImagens = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Images");
 
     public ImportarMatriculasView(PrincipalView telaPrincial)
     {
         InitializeComponent();
-        //Carrega as configurações do pragrama 
-        _configuration = ConfiguracaoCommon.LoadConfiguration();
         TelaPrincipal = telaPrincial;
-
-        //Estilização da tela
-        ImagemSelecaoArquivoIMG.Image = Image.FromFile(Path.Combine(diretorioImagens, "Importar.png"));
-        ImagemSelecaoArquivoIMG.SizeMode = PictureBoxSizeMode.Zoom;
-
-        ImportarMatriculasBTN.BackgroundImage = Image.FromFile(Path.Combine(diretorioImagens, "Procurar.png"));
-        ImportarMatriculasBTN.BackgroundImageLayout = ImageLayout.Zoom;
-        ImportarCertificadosBTN.BackgroundImage = Image.FromFile(Path.Combine(diretorioImagens, "Procurar.png"));
-        ImportarCertificadosBTN.BackgroundImageLayout = ImageLayout.Zoom;
-        ConfirmarBTN.Image = Image.FromFile(Path.Combine(diretorioImagens, "Confirmar.png"));
-        CancelarBTN.Image = Image.FromFile(Path.Combine(diretorioImagens, "Cancelar.png"));
     }
 
     /// <summary>
@@ -66,16 +54,21 @@ public partial class ImportarMatriculasView : Form
                 Matriculas = retorno.matriculas;
                 Certificados.Clear();
                 DiretorioCertificadosTXT.Text = string.Empty;
-                // Carrea a imagem de pendente para todos os registros de matrículas
-                foreach (DataGridViewRow row in MatriculasDGV.Rows) row.Cells["Certificado"].Value = Image.FromFile(Path.Combine(diretorioImagens, "Pendente.png"));
+                // Carrega a imagem de pendente para todos os registros de matrículas
+                foreach (DataGridViewRow row in MatriculasDGV.Rows) row.Cells["Certificado"].Value = Properties.Resources.PendenteVermelho;
+                // Carrega os certificados identificados na importação da matrícula, se houver
+                Certificados = retorno.certificados;
             }
+            // Se forem encontrados certificados vinculados às matrículas importadas, carrega-os no datagridview
+            if (Certificados.Count > 0) Auxiliares.IdentificarMatriculasComCertificado(MatriculasDGV, Certificados);
+
             var feedback = Auxiliares.ContarRegistros(MatriculasDGV);
             FeedbackLBL.Text = feedback.feedback;
         }
     }
 
     /// <summary>
-    /// Carrega a lista de certificados caso sejam encontrados no diretório
+    /// Carrega a lista de Certificados caso sejam encontrados no diretório
     /// </summary>
     private void ImportarCertificadosBTN_Click(object sender, EventArgs e)
     {
@@ -83,7 +76,7 @@ public partial class ImportarMatriculasView : Form
 
         if (DiretorioCertificadosTXT.Text != string.Empty)
         {
-            var retorno = ImportarCertificadosService.ImportarCertificados(DiretorioCertificadosTXT.Text, _configuration["GetSenhas:SenhaAdminPDF"], Matriculas);
+            var retorno = ImportarCertificadosService.ImportarCertificados(DiretorioCertificadosTXT.Text, ConfiguracaoCommon.pswd(), Matriculas);
             Certificados = retorno.certificados ?? Certificados;
 
             if (retorno.logs.Count > 0)
@@ -107,7 +100,7 @@ public partial class ImportarMatriculasView : Form
             }
             else
             {
-                Auxiliares.IdentificarMatriculasComCertificado(MatriculasDGV, Certificados, diretorioImagens);
+                Auxiliares.IdentificarMatriculasComCertificado(MatriculasDGV, Certificados);
             }
             var feedback = Auxiliares.ContarRegistros(MatriculasDGV);
             FeedbackLBL.Text = feedback.feedback;
@@ -115,7 +108,7 @@ public partial class ImportarMatriculasView : Form
     }
 
     /// <summary>
-    /// Ativa o botão para importar certificados quando está preenchido
+    /// Ativa o botão para importar Certificados quando está preenchido
     /// </summary>
     private void DiretorioMatriculasTXT_TextChanged(object sender, EventArgs e)
     {
@@ -196,17 +189,23 @@ public partial class ImportarMatriculasView : Form
         }
     }
 
+    /// <summary>
+    /// Filtra apenas as matrículas que possuem Certificados criptografados
+    /// </summary>
     private void ApenasComCertificadosCHK_CheckedChanged(object sender, EventArgs e)
     {
-        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK, MatriculasDGV, Matriculas, Certificados, FeedbackLBL, diretorioImagens);
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK, MatriculasDGV, Matriculas, Certificados, FeedbackLBL);
     }
 
+    /// <summary>
+    /// Seleciona ou desseleciona todos os registros visíveis no datagridview
+    /// </summary>
     private void MatriculasDGV_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
     {
         // Verificar se o clique foi na coluna de CheckBox (por exemplo, na coluna com índice 0)
         if (e.ColumnIndex == MatriculasDGV.Columns["[X]"].Index)
         {
-            int linhasMarcadas = Auxiliares.ContarRegistros(MatriculasDGV).selecionados; //0;
+            int linhasMarcadas = Auxiliares.ContarRegistros(MatriculasDGV).selecionados;
 
             if (Auxiliares.ContarRegistros(MatriculasDGV).total.Equals(linhasMarcadas))
             {
@@ -256,6 +255,9 @@ public partial class ImportarMatriculasView : Form
         }
     }
 
+    /// <summary>
+    /// Fecha a tela de inmportação de matrículas
+    /// </summary>
     private void CancelarBTN_Click(object sender, EventArgs e)
     {
         Close();
@@ -263,8 +265,9 @@ public partial class ImportarMatriculasView : Form
 
     private void ConfirmarBTN_Click(object sender, EventArgs e)
     {
-        //TelaPrincipal.Dt = Conversao.ConvertDataGridViewToDataTable(MatriculasDGV);
-        //TelaPrincipal.MatriculasSelecionadasDGV.DataSource = TelaPrincipal.Dt;
-        //Close();
+        TelaPrincipal.Dt = Conversao.ConvertDataGridViewToDataTable(MatriculasDGV);
+        TelaPrincipal.MatriculasSelecionadasDGV.DataSource = TelaPrincipal.Dt;
+        FormatacaoCommon.FormatarDgv(TelaPrincipal.MatriculasSelecionadasDGV);
+        Close();
     }
 }

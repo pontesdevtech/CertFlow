@@ -1,18 +1,19 @@
-﻿using E_Docs.Domain.Entities;
-using E_Docs.Presenter.DTOs;
+﻿using E_Docs.Presenter.DTOs;
 using E_Docs.Presenter.Mappings;
-using System.Data;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace E_Docs.Views.Common;
 public static class Auxiliares
 {
-    public static void FiltrarMatriculas(CheckBox chk, DataGridView dgv, List<MatriculaDTO> matriculasDto, List<CertificadoDTO> certificadosDto, ToolStripLabel feedback, string diretorioImagens)
+    public static void FiltrarMatriculas(CheckBox chk, DataGridView dgv, List<MatriculaDTO> matriculasDto, List<CertificadoDTO> certificadosDto, ToolStripLabel feedback)
     {
         List<MatriculaDTO> filtroDto = [];
 
         foreach (var matricula in matriculasDto)
         {
-            if(certificadosDto.FirstOrDefault(x => x.Matricula.Cpf.Equals(matricula.Cpf)) != null) filtroDto.Add(matricula);
+            if (certificadosDto.FirstOrDefault(x => x.Matricula.Cpf.Equals(matricula.Cpf)) != null) filtroDto.Add(matricula);
         }
 
         // Configurar exibição dos dados no datagridview
@@ -25,7 +26,7 @@ public static class Auxiliares
             dgv.DataSource = MatriculaMap.ConverterListaDtoParaDataTable(matriculasDto);
         }
         FormatacaoCommon.FormatarDgv(dgv);
-        IdentificarMatriculasComCertificado(dgv, certificadosDto, diretorioImagens);
+        IdentificarMatriculasComCertificado(dgv, certificadosDto);
         feedback.Text = ContarRegistros(dgv).feedback;
     }
 
@@ -42,19 +43,19 @@ public static class Auxiliares
         return (total, selecionados, $"Registros Selecionados: {selecionados}/{total}");
     }
 
-    public static void IdentificarMatriculasComCertificado(DataGridView dgv, List<CertificadoDTO> certificados, string diretorioImagens)
+    public static void IdentificarMatriculasComCertificado(DataGridView dgv, List<CertificadoDTO> certificados)
     {
         foreach (DataGridViewRow row in dgv.Rows)
         {
             string? aluno = row.Cells["Aluno"].Value.ToString();
             if (certificados.FirstOrDefault(x => x.NomeAluno.Equals(aluno.Split(" - ")[1])) != null)
             {
-                row.Cells["Certificado"].Value = Image.FromFile(Path.Combine(diretorioImagens, "Certificado.png"));
+                row.Cells["Certificado"].Value = Properties.Resources.CertificadoVerde;
                 row.Cells["Unidade"].Value = certificados.FirstOrDefault(x => x.NomeAluno.Equals(aluno.Split(" - ")[1])).Unidade;
             }
             else
             {
-                row.Cells["Certificado"].Value = Image.FromFile(Path.Combine(diretorioImagens, "Pendente.png"));
+                row.Cells["Certificado"].Value = Properties.Resources.PendenteVermelho;
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace E_Docs.Views.Common;
 public static class Conversao
@@ -11,7 +13,7 @@ public static class Conversao
         // Adicionar colunas ao DataTable com base nas colunas do DataGridView
         foreach (DataGridViewColumn column in dgv.Columns)
         {
-            dataTable.Columns.Add(column.HeaderText, column.ValueType ?? typeof(string));
+            dataTable.Columns.Add(column.Name, column.ValueType ?? typeof(string));
         }
 
         // Adicionar linhas ao DataTable com base nas linhas do DataGridView
@@ -23,7 +25,7 @@ public static class Conversao
                 DataRow dataRow = dataTable.NewRow();
                 foreach (DataGridViewColumn column in dgv.Columns)
                 {
-                    dataRow[column.HeaderText] = row.Cells[column.Index].Value ?? DBNull.Value;
+                    dataRow[column.Name] = row.Cells[column.Name].Value ?? DBNull.Value;
                 }
                 dataTable.Rows.Add(dataRow);
             }

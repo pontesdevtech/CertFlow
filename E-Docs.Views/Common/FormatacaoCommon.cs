@@ -1,4 +1,6 @@
 ﻿using E_Docs.Views.Views;
+using System;
+using System.Windows.Forms;
 
 namespace E_Docs.Views.Common;
 public static class FormatacaoCommon
@@ -110,7 +112,7 @@ public static class FormatacaoCommon
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="InvalidOperationException"></exception>
     /// <exception cref="NullReferenceException"></exception>
-    private static void CriarColunaDGV(Type tipoColuna, string nomeColuna, DataGridView dgv)
+    public static void CriarColunaDGV(Type tipoColuna, string nomeColuna, DataGridView dgv)
     {
         try
         {

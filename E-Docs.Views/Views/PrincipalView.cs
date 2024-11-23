@@ -1,6 +1,9 @@
 using E_Docs.Views.Common;
 using E_Docs.Views.Views;
+using System;
 using System.Data;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace E_Docs.Views;
 
@@ -130,7 +133,6 @@ public partial class PrincipalView : Form
     private void MatriculasSelecionadasDGV_CellEnter(object sender, DataGridViewCellEventArgs e)
     {
         int linha = e.RowIndex;
-        UnidadeLBL.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["Unidade"].Value.ToString();
         CursoTXT.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["Curso"].Value.ToString();
         TurmaTXT.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["Turma"].Value.ToString();
         AlunoTXT.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["Aluno"].Value.ToString();

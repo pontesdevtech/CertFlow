@@ -136,7 +136,7 @@ public static class EmailService
         try
         {
             var anexo = new Attachment(diretorioArquivo, MediaTypeNames.Application.Octet);
-            ContentDisposition disposition = anexo.ContentDisposition;
+            ContentDisposition? disposition = anexo.ContentDisposition;
             // Carrega as informações de criação, modificação e de leitura do arquivo
             disposition.CreationDate = File.GetCreationTime(diretorioArquivo);
             disposition.ModificationDate = File.GetLastWriteTime(diretorioArquivo);
@@ -168,7 +168,7 @@ public static class EmailService
     /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
     private static void EnviarEmailViaSMTP(ServidorEmail servidor, MailMessage mensagem)
     {
-        SmtpClient smtpClient = new SmtpClient();
+        SmtpClient smtpClient = new();
         try
         {
             smtpClient.Host = servidor.Provedor;

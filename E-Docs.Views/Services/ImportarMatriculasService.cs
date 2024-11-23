@@ -3,6 +3,8 @@ using E_Docs.Presenter.Common.Enums;
 using E_Docs.Presenter.DTOs;
 using E_Docs.Presenter.Services;
 using E_Docs.Views.Common;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace E_Docs.Views.Services;
 internal static class ImportarMatriculasService
@@ -13,12 +15,17 @@ internal static class ImportarMatriculasService
     /// <param name="diretorio">Diretório do arquivo com a lista de matrículas</param>
     /// <param name="dgv">Data grid que será carregado com as informações das matrículas</param>
     /// <returns>Retorna uma lista de logs de erros. Retorna lista vazia, caso não ocorra nenhuma exceção</returns>
-    internal static (List<MatriculaDTO>matriculas, List<LogDTO>logs) ImportarMatriculas(string diretorio, DataGridView dgv)
+    internal static (List<MatriculaDTO>matriculas, List<CertificadoDTO>certificados, List<LogDTO>logs) ImportarMatriculas(string diretorio, DataGridView dgv)
     {
         // Monitorar a execução do processo
-        var dt = ExecutorProcessosCommon.ExecutarProcesso(ENomeProcessoCommon.CarregarMatriculas, () => MatriculaService.CarregarMatriculas(diretorio));
+        var dt = ExecutorProcessosCommon.ExecutarProcesso(ENomeProcessoCommon.CarregarMatriculas, () => MatriculaService.CarregarMatriculas(diretorio, ConfiguracaoCommon.pswd()));
         dgv.DataSource = dt.retorno.matriculasDt;
         if (dt.logs.Count == 0) ExecutorProcessosCommon.ExecutarProcesso(ENomeProcessoCommon.FormatarTabela, () => FormatacaoCommon.FormatarDgv(dgv));
-        return (dt.retorno.matriculasDTO, dt.logs);
+        return (dt.retorno.matriculasDTO, dt.retorno.certificadosDTO, dt.logs);
+    }
+
+    internal static void TransferirRegistros(DataGridView dgv)
+    {
+        ExecutorProcessosCommon.ExecutarProcesso(ENomeProcessoCommon.FormatarTabela, () => FormatacaoCommon.FormatarDgv(dgv));
     }
 }

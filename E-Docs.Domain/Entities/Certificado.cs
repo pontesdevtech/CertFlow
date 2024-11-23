@@ -11,7 +11,7 @@ public class Certificado
     /// <param name="cargaHoraria">"Carga Horária" extraída do arquivo</param>
     /// <param name="periodo">"Período do Curso" extraído do arquivo</param>
     /// <param name="matricula">"Matrícula" vinculada ao "Certificado"</param>
-    public Certificado(string nomeArquivo, string unidade, string nomeAluno, string curso, string cargaHoraria, string periodo, Matricula matricula)
+    public Certificado(string nomeArquivo, string unidade, string nomeAluno, string curso, string cargaHoraria, string periodo, Matricula? matricula)
     {
         NomeArquivo = nomeArquivo;
         Unidade = unidade;
@@ -30,7 +30,7 @@ public class Certificado
     public string CargaHoraria { get; set; } = string.Empty;
     public string Periodo { get; set; } = string.Empty;
     //Associações da classe
-    public Matricula Matricula { get; set; }
+    public Matricula? Matricula { get; set; }
 
     /// <summary>
     /// Sobrescrição do método "ToString()" para exibição das informações do documento após leitura.

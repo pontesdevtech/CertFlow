@@ -1,4 +1,7 @@
-﻿namespace E_Docs.Views.Views;
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace E_Docs.Views.Views;
 
 partial class ExcecoesView
 {
@@ -28,7 +31,6 @@ partial class ExcecoesView
     /// </summary>
     private void InitializeComponent()
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ExcecoesView));
         InformacoesTecnicasTXT = new TextBox();
         ExcecaoGBX = new GroupBox();
         MensagemErroLBL = new Label();
@@ -91,9 +93,11 @@ partial class ExcecoesView
         // 
         ImagemExcecaoIMG.BackColor = SystemColors.ControlLight;
         ImagemExcecaoIMG.Dock = DockStyle.Left;
+        ImagemExcecaoIMG.Image = Properties.Resources.ErroVermelho;
         ImagemExcecaoIMG.Location = new Point(5, 21);
         ImagemExcecaoIMG.Name = "ImagemExcecaoIMG";
         ImagemExcecaoIMG.Size = new Size(100, 96);
+        ImagemExcecaoIMG.SizeMode = PictureBoxSizeMode.Zoom;
         ImagemExcecaoIMG.TabIndex = 1;
         ImagemExcecaoIMG.TabStop = false;
         // 
@@ -166,7 +170,7 @@ partial class ExcecoesView
         // FecharBTN
         // 
         FecharBTN.Alignment = ToolStripItemAlignment.Right;
-        FecharBTN.Image = (Image)resources.GetObject("FecharBTN.Image");
+        FecharBTN.Image = Properties.Resources.PendenteVermelho;
         FecharBTN.ImageTransparentColor = Color.Magenta;
         FecharBTN.Name = "FecharBTN";
         FecharBTN.Size = new Size(62, 22);
@@ -190,7 +194,6 @@ partial class ExcecoesView
         Name = "ExcecoesView";
         StartPosition = FormStartPosition.CenterScreen;
         Text = "Erro ao executar o processo";
-        Load += ExcecoesView_Load;
         ExcecaoGBX.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)ImagemExcecaoIMG).EndInit();
         ResumoExcecaoGBX.ResumeLayout(false);
@@ -210,7 +213,6 @@ partial class ExcecoesView
     private PictureBox ImagemExcecaoIMG;
     private GroupBox ResumoExcecaoGBX;
     private ToolStrip BarraFerramentasTST;
-    private ToolStripButton CancelarBTN;
     private ToolStripButton FecharBTN;
     private ToolStripLabel FeedbackLBL;
     public TextBox InformacoesTecnicasTXT;
