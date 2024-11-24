@@ -14,9 +14,9 @@ namespace E_Docs.Views;
 
 public partial class PrincipalView : Form
 {
-    public DataTable Dt { get; set; } = new DataTable();
     public List<CertificadoDTO> Certificados = [];
     public List<MatriculaDTO> Matriculas = [];
+    public string? Diretorio { get; set; } = string.Empty;
 
     public readonly string Provedor = "smtp.office365.com";
     public readonly int Porta = 587;
@@ -56,27 +56,6 @@ public partial class PrincipalView : Form
         FormatacaoCommon.FormatarDgv(enviarCertificados.EmailsDGV);
 
         enviarCertificados.ShowDialog();
-    }
-
-    private void PrincipalView_Activated(object sender, EventArgs e)
-    {
-        MatriculasSelecionadasDGV.DataSource = Dt;
-
-        foreach (DataGridViewRow linha in MatriculasSelecionadasDGV.Rows)
-        {
-            linha.Cells["[X]"].Value = false;
-        }
-
-        EnviarCertificadosBTN.Enabled = MatriculasSelecionadasDGV.Rows.Count > 0 ? true : false;
-
-        FeedbackLBL.Text = Auxiliares.ContarRegistros(MatriculasSelecionadasDGV).feedback;
-        int count = MatriculasSelecionadasDGV.Rows.Cast<DataGridViewRow>()
-                    .Count(linha => !linha.IsNewRow &&
-                    Convert.ToBoolean(linha.Cells["[X]"].Value) &&
-                    !string.IsNullOrEmpty(linha.Cells["Unidade"].Value?.ToString()));
-
-        EnviarCertificadosBTN.Enabled = count > 0 ? true : false;
-        if (MatriculasSelecionadasDGV.Columns.Contains("[X]")) MatriculasSelecionadasDGV.Columns["[X]"].Frozen = true;
     }
 
     private void MatriculasSelecionadasDGV_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -145,7 +124,7 @@ public partial class PrincipalView : Form
                 {
                     chk = (DataGridViewCheckBoxCell)MatriculasSelecionadasDGV.Rows[row.Index].Cells["[X]"];
                     // Verificar se o CheckBox está marcado
-                    if ((bool)chk.Value)
+                    if (Convert.ToBoolean(checkBoxCell.Value))
                     {
                         // Selecionar a linha inteira
                         MatriculasSelecionadasDGV.Rows[row.Index].DefaultCellStyle.BackColor = Color.DeepSkyBlue;
@@ -182,10 +161,39 @@ public partial class PrincipalView : Form
         EmailTXT.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["Email"].Value.ToString();
 
         MatriculasSelecionadasDGV.Enabled = MatriculasSelecionadasDGV.Rows.Count > 0 ? true : false;
+        PainelOpcoesPNL.Enabled = MatriculasSelecionadasDGV.Rows.Count > 0 ? true : false;
     }
 
     private void ApenasComCertificadosCHK_CheckedChanged(object sender, EventArgs e)
     {
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasSelecionadasDGV, Matriculas, Certificados, FeedbackLBL);
+        if (MatriculasSelecionadasDGV.Columns.Contains("[X]")) MatriculasSelecionadasDGV.Columns["[X]"].Frozen = true;
+    }
+
+    private void PrincipalView_Load(object sender, EventArgs e)
+    {
+        MatriculasSelecionadasDGV.DataSource = Matriculas;
+
+        foreach (DataGridViewRow linha in MatriculasSelecionadasDGV.Rows)
+        {
+            linha.Cells["[X]"].Value = false;
+        }
+
+        FeedbackLBL.Text = Auxiliares.ContarRegistros(MatriculasSelecionadasDGV).feedback;
+        int count = MatriculasSelecionadasDGV.Rows.Cast<DataGridViewRow>()
+                    .Count(linha => !linha.IsNewRow &&
+                    Convert.ToBoolean(linha.Cells["[X]"].Value) &&
+                    !string.IsNullOrEmpty(linha.Cells["Unidade"].Value?.ToString()));
+
+        PainelOpcoesPNL.Enabled = MatriculasSelecionadasDGV.Rows.Count > 0 ? true : false;
+        EnviarCertificadosBTN.Enabled = count > 0 ? true : false;
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasSelecionadasDGV, Matriculas, Certificados, FeedbackLBL);
+        if (MatriculasSelecionadasDGV.Columns.Contains("[X]")) MatriculasSelecionadasDGV.Columns["[X]"].Frozen = true;
+    }
+
+    private void LimparBTN_Click(object sender, EventArgs e)
+    {
+        if (MatriculasSelecionadasDGV.Rows.Count > 0) Matriculas.Clear();
         Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasSelecionadasDGV, Matriculas, Certificados, FeedbackLBL);
         if (MatriculasSelecionadasDGV.Columns.Contains("[X]")) MatriculasSelecionadasDGV.Columns["[X]"].Frozen = true;
     }

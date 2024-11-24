@@ -37,6 +37,7 @@ partial class PrincipalView
         BarraFerramentasMatriculasTST = new ToolStrip();
         PesquisarLBL = new ToolStripLabel();
         PesquisarTXT = new ToolStripTextBox();
+        LimparBTN = new ToolStripButton();
         ApenasComCertificadosCHK = new CheckBox();
         BarraStatusFeedback = new StatusStrip();
         FeedbackLBL = new ToolStripStatusLabel();
@@ -116,12 +117,13 @@ partial class PrincipalView
         // 
         BarraFerramentasMatriculasTST.BackColor = System.Drawing.SystemColors.ControlLight;
         BarraFerramentasMatriculasTST.Dock = DockStyle.Fill;
-        BarraFerramentasMatriculasTST.Items.AddRange(new ToolStripItem[] { PesquisarLBL, PesquisarTXT });
+        BarraFerramentasMatriculasTST.Items.AddRange(new ToolStripItem[] { PesquisarLBL, PesquisarTXT, LimparBTN });
         BarraFerramentasMatriculasTST.Location = new System.Drawing.Point(10, 3);
         BarraFerramentasMatriculasTST.Name = "BarraFerramentasMatriculasTST";
+        BarraFerramentasMatriculasTST.Padding = new Padding(0, 0, 10, 0);
         BarraFerramentasMatriculasTST.Size = new System.Drawing.Size(582, 27);
         BarraFerramentasMatriculasTST.TabIndex = 1;
-        BarraFerramentasMatriculasTST.Text = "toolStrip1";
+        BarraFerramentasMatriculasTST.Text = "Limpar";
         // 
         // PesquisarLBL
         // 
@@ -135,6 +137,16 @@ partial class PrincipalView
         // 
         PesquisarTXT.Name = "PesquisarTXT";
         PesquisarTXT.Size = new System.Drawing.Size(300, 27);
+        // 
+        // LimparBTN
+        // 
+        LimparBTN.Alignment = ToolStripItemAlignment.Right;
+        LimparBTN.Image = Properties.Resources.LimparVermelho;
+        LimparBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
+        LimparBTN.Name = "LimparBTN";
+        LimparBTN.Size = new System.Drawing.Size(64, 24);
+        LimparBTN.Text = "Limpar";
+        LimparBTN.Click += LimparBTN_Click;
         // 
         // ApenasComCertificadosCHK
         // 
@@ -339,7 +351,7 @@ partial class PrincipalView
         Padding = new Padding(5);
         StartPosition = FormStartPosition.CenterScreen;
         Text = "CertFlow - Fluxo de Preparação e Envio de Certificados Digitais";
-        Activated += PrincipalView_Activated;
+        Load += PrincipalView_Load;
         ((System.ComponentModel.ISupportInitialize)MatriculasSelecionadasDGV).EndInit();
         MatriculasGBX.ResumeLayout(false);
         MatriculasGBX.PerformLayout();
@@ -385,4 +397,5 @@ partial class PrincipalView
     public DataGridView MatriculasSelecionadasDGV;
     private Panel PainelOpcoesPNL;
     private CheckBox ApenasComCertificadosCHK;
+    private ToolStripButton LimparBTN;
 }

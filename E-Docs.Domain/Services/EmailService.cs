@@ -26,18 +26,17 @@ public static class EmailService
     /// <exception cref="SmtpFailedRecipientException">Lançada quando a entrega de um e-mail falha para um destinatário específico.</exception>
     /// <exception cref="SmtpException">Lançada quando ocorre um erro relacionado ao envio de um e-mail via SMTP.</exception>
     /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
-    public static string EnviarEmail(ServidorEmail servidor, Email email)
+    public static void EnviarEmail(Email email)
     {
         try
         {
             // Carrega a variável com o retorno do método "Preparar Mensagem"
-            var mensagem = PrepararMensagem(servidor, email);
+            var mensagem = PrepararMensagem(email);
             // Invoca o método de para envio da mensagem via smtp
-            EnviarEmailViaSMTP(servidor, mensagem);
+            EnviarEmailViaSMTP(email.ServidorEmail, mensagem);
             //Retorna uma mensagem personalizada com os emails de destinatário principal
             string destinatarios = string.Empty;
             foreach (var destinatario in mensagem.To) destinatarios = $"{destinatario.User}; ";
-            return $"SUCESSO: Email enviado com sucesso para {destinatarios}";
         }
         catch (ArgumentOutOfRangeException) { throw; }
         catch (ArgumentNullException) { throw; }
@@ -67,21 +66,33 @@ public static class EmailService
     /// <exception cref="NotSupportedException">Lançada quando uma operação não é suportada.</exception>
     /// <exception cref="FormatException">Lançada quando ocorre um erro de formato ao tentar converter ou processar dados.</exception>
     /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
-    private static MailMessage PrepararMensagem(ServidorEmail servidor, Email email)
+    private static MailMessage PrepararMensagem(/*ServidorEmail servidor, */Email email)
     {
         MailMessage mail = new();
 
         try
         {
             // Configura as propriedades do objeto MailMessage
-            if (servidor.Provedor != null && servidor.Usuario != null && servidor.Senha != null) mail.From = new MailAddress(servidor.Usuario);
-            foreach (var to in email.EmailsDestinatario) mail.To.Add(ValidarEmail(to));
-            foreach (var cc in email.EmailsEmCopia) mail.CC.Add(ValidarEmail(cc));
-            foreach (var cco in email.EmailsEmCopiaOculta) mail.Bcc.Add(ValidarEmail(cco));
+            if (email.ServidorEmail.Provedor != null && email.ServidorEmail.Usuario != null && email.ServidorEmail.Senha != null) mail.From = new MailAddress(email.ServidorEmail.Usuario);
+            foreach (var to in email.EmailsDestinatario)
+            {
+                if(!string.IsNullOrEmpty(to)) mail.To.Add(ValidarEmail(to));
+            }
+            foreach (var cc in email.EmailsEmCopia)
+            {
+                if (!string.IsNullOrEmpty(cc)) mail.CC.Add(ValidarEmail(cc));
+            }
+            foreach (var cco in email.EmailsEmCopiaOculta)
+            {
+                if (!string.IsNullOrEmpty(cco)) mail.Bcc.Add(ValidarEmail(cco));
+            }
             mail.Subject = email.Assunto;
             mail.Body = email.CorpoEmail;
-            mail.IsBodyHtml = true;
-            foreach (var anexo in email.Anexos) mail.Attachments.Add(PrepararAnexo(anexo));
+            mail.IsBodyHtml = false;
+            foreach (var anexo in email.Anexos)
+            {
+                if (!string.IsNullOrEmpty(anexo)) mail.Attachments.Add(PrepararAnexo(anexo));
+            }
             return mail;
         }
         catch (ArgumentNullException) { throw; }
@@ -102,14 +113,18 @@ public static class EmailService
     /// <exception cref="ArgumentException">Lançada quando um argumento é inválido ou não esperado.</exception>
     /// <exception cref="FormatException">Lançada quando ocorre um erro de formato ao tentar converter ou processar dados.</exception>
     /// <exception cref="Exception">Lançada quando ocorre um erro inesperado.</exception>
-    private static MailAddress ValidarEmail(string email)
+    private static MailAddress? ValidarEmail(string email)
     {
-        MailAddress ma = null!;
+        MailAddress ma;
         try
         {
             if (!string.IsNullOrEmpty(email))
             {
                 ma = new MailAddress(email);
+            }
+            else
+            {
+                return null;
             }
             return ma;
         }

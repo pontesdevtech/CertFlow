@@ -4,6 +4,7 @@ using E_Docs.Views.Services;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -30,20 +31,20 @@ public partial class ImportarMatriculasView : Form
         if (DiretorioMatriculasTXT.Text != string.Empty)
         {
             var retorno = ImportarMatriculasService.ImportarMatriculas(DiretorioMatriculasTXT.Text, MatriculasDGV);
-            if (retorno.logs.Count > 0)
-            {
-                ExcecoesView excecoesView = new();
-                var contador = 1;
-                foreach (var log in retorno.logs)
-                {
-                    if (contador == 1) excecoesView.Text = log.GetMensagem().titulo;
-                    if (contador == 1) excecoesView.MensagemErroLBL.Text = log.GetMensagem().mensagem;
-                    excecoesView.InformacoesBasicasTXT.Text += log.GetMensagem().informacoesBasicas;
-                    excecoesView.InformacoesTecnicasTXT.Text += log.GetMensagem().informacoesTecnicas;
-                    contador++;
-                }
-                excecoesView.ShowDialog();
-            }
+            //if (retorno.logs.Count > 0)
+            //{
+            //    ExcecoesView excecoesView = new();
+            //    var contador = 1;
+            //    foreach (var log in retorno.logs)
+            //    {
+            //        if (contador == 1) excecoesView.Text = log.GetMensagem().titulo;
+            //        if (contador == 1) excecoesView.MensagemErroLBL.Text = log.GetMensagem().mensagem;
+            //        excecoesView.InformacoesBasicasTXT.Text += log.GetMensagem().informacoesBasicas;
+            //        excecoesView.InformacoesTecnicasTXT.Text += log.GetMensagem().informacoesTecnicas;
+            //        contador++;
+            //    }
+            //    excecoesView.ShowDialog();
+            //}
 
             if (retorno.matriculas.Count == 0 && retorno.logs.Count > 0)
             {
@@ -86,20 +87,20 @@ public partial class ImportarMatriculasView : Form
             var retorno = ImportarCertificadosService.ImportarCertificados(DiretorioCertificadosTXT.Text, ConfiguracaoCommon.pswd(), Matriculas);
             Certificados = retorno.certificados ?? Certificados;
 
-            if (retorno.logs.Count > 0)
-            {
-                ExcecoesView excecoesView = new();
-                var contador = 1;
-                foreach (var log in retorno.logs)
-                {
-                    if (contador == 1) excecoesView.Text = log.GetMensagem().titulo;
-                    if (contador == 1) excecoesView.MensagemErroLBL.Text = log.GetMensagem().mensagem;
-                    excecoesView.InformacoesBasicasTXT.Text += log.GetMensagem().informacoesBasicas;
-                    excecoesView.InformacoesTecnicasTXT.Text += log.GetMensagem().informacoesTecnicas;
-                    contador++;
-                }
-                excecoesView.ShowDialog();
-            }
+            //if (retorno.logs.Count > 0)
+            //{
+            //    ExcecoesView excecoesView = new();
+            //    var contador = 1;
+            //    foreach (var log in retorno.logs)
+            //    {
+            //        if (contador == 1) excecoesView.Text = log.GetMensagem().titulo;
+            //        if (contador == 1) excecoesView.MensagemErroLBL.Text = log.GetMensagem().mensagem;
+            //        excecoesView.InformacoesBasicasTXT.Text += log.GetMensagem().informacoesBasicas;
+            //        excecoesView.InformacoesTecnicasTXT.Text += log.GetMensagem().informacoesTecnicas;
+            //        contador++;
+            //    }
+            //    excecoesView.ShowDialog();
+            //}
 
             if (Certificados.Count == 0 && retorno.logs.Count > 0)
             {
@@ -258,22 +259,32 @@ public partial class ImportarMatriculasView : Form
 
     private void ConfirmarBTN_Click(object sender, EventArgs e)
     {
-        TelaPrincipal.Dt = Conversao.ConvertDataGridViewToDataTable(MatriculasDGV);
-        TelaPrincipal.MatriculasSelecionadasDGV.DataSource = TelaPrincipal.Dt;
+        List<MatriculaDTO> matriculas = [];
+        foreach (DataGridViewRow row in MatriculasDGV.Rows)
+        {
+            if (Convert.ToBoolean(row.Cells["[X]"].Value)) matriculas.Add(Matriculas.FirstOrDefault(x => x.Cpf.Equals(row.Cells["Cpf"].Value)));
+        }
+        TelaPrincipal.Matriculas = matriculas;
+        TelaPrincipal.MatriculasSelecionadasDGV.DataSource = TelaPrincipal.Matriculas;
+        TelaPrincipal.Certificados = Auxiliares.IdentificarMatriculasComCertificado(TelaPrincipal.MatriculasSelecionadasDGV, Certificados);
         FormatacaoCommon.FormatarDgv(TelaPrincipal.MatriculasSelecionadasDGV);
-        Auxiliares.IdentificarMatriculasComCertificado(TelaPrincipal.MatriculasSelecionadasDGV, Certificados);
-        TelaPrincipal.Certificados = Certificados;
-        TelaPrincipal.Matriculas = Matriculas;
         Auxiliares.IdentificarEmailsEnviados(TelaPrincipal.MatriculasSelecionadasDGV, new());
+        TelaPrincipal.Diretorio = DiretorioCertificadosTXT.Text != string.Empty ? DiretorioCertificadosTXT.Text : Path.GetDirectoryName(DiretorioMatriculasTXT.Text);
         Close();
     }
 
-    /// <summary>
-    /// Executa as ações relacioandas ao evento de ativação do formulário
-    /// </summary>
-    private void ImportarMatriculasView_Activated(object sender, EventArgs e)
+    private void LimparBTN_Click(object sender, EventArgs e)
+    {
+        if (MatriculasDGV.Rows.Count > 0) Matriculas.Clear();
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasDGV, Matriculas, Certificados, FeedbackLBL);
+        if (MatriculasDGV.Columns.Contains("[X]")) MatriculasDGV.Columns["[X]"].Frozen = true;
+    }
+
+    private void ImportarMatriculasView_Load(object sender, EventArgs e)
     {
         ImportarCertificadosBTN.Enabled = false;
         ConfirmarBTN.Enabled = false;
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasDGV, Matriculas, Certificados, FeedbackLBL);
+        if (MatriculasDGV.Columns.Contains("[X]")) MatriculasDGV.Columns["[X]"].Frozen = true;
     }
 }

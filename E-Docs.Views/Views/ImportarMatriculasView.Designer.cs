@@ -40,6 +40,10 @@ partial class ImportarMatriculasView
         MatriculasGBX = new GroupBox();
         MatriculasDGV = new DataGridView();
         PainelOpcoesPNL = new Panel();
+        BarraFerramentasMatriculasTST = new ToolStrip();
+        PesquisarLBL = new ToolStripLabel();
+        PesquisarTXT = new ToolStripTextBox();
+        LimparBTN = new ToolStripButton();
         ApenasComCertificadosCHK = new CheckBox();
         panel1 = new Panel();
         DiretorioMatriculasLBL = new Label();
@@ -58,6 +62,7 @@ partial class ImportarMatriculasView
         MatriculasGBX.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)MatriculasDGV).BeginInit();
         PainelOpcoesPNL.SuspendLayout();
+        BarraFerramentasMatriculasTST.SuspendLayout();
         panel1.SuspendLayout();
         BarraFerramentasTST.SuspendLayout();
         SuspendLayout();
@@ -68,7 +73,7 @@ partial class ImportarMatriculasView
         OrietacaoImportacaoLBL.Location = new System.Drawing.Point(105, 21);
         OrietacaoImportacaoLBL.Name = "OrietacaoImportacaoLBL";
         OrietacaoImportacaoLBL.Padding = new Padding(10);
-        OrietacaoImportacaoLBL.Size = new System.Drawing.Size(545, 96);
+        OrietacaoImportacaoLBL.Size = new System.Drawing.Size(603, 96);
         OrietacaoImportacaoLBL.TabIndex = 0;
         OrietacaoImportacaoLBL.Text = "Selecione o local onde estão armazenados a lista de matrículados e os Certificados para ajuste e envio.";
         OrietacaoImportacaoLBL.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -94,7 +99,7 @@ partial class ImportarMatriculasView
         OrientacoesGBX.Location = new System.Drawing.Point(5, 5);
         OrientacoesGBX.Name = "OrientacoesGBX";
         OrientacoesGBX.Padding = new Padding(5);
-        OrientacoesGBX.Size = new System.Drawing.Size(655, 122);
+        OrientacoesGBX.Size = new System.Drawing.Size(713, 122);
         OrientacoesGBX.TabIndex = 2;
         OrientacoesGBX.TabStop = false;
         OrientacoesGBX.Text = "Seleção dos Arquivos";
@@ -106,7 +111,7 @@ partial class ImportarMatriculasView
         ImportacaoGBX.Dock = DockStyle.Fill;
         ImportacaoGBX.Location = new System.Drawing.Point(5, 127);
         ImportacaoGBX.Name = "ImportacaoGBX";
-        ImportacaoGBX.Size = new System.Drawing.Size(655, 462);
+        ImportacaoGBX.Size = new System.Drawing.Size(713, 504);
         ImportacaoGBX.TabIndex = 3;
         ImportacaoGBX.TabStop = false;
         ImportacaoGBX.Text = "Importação";
@@ -118,7 +123,8 @@ partial class ImportarMatriculasView
         MatriculasGBX.Dock = DockStyle.Fill;
         MatriculasGBX.Location = new System.Drawing.Point(3, 110);
         MatriculasGBX.Name = "MatriculasGBX";
-        MatriculasGBX.Size = new System.Drawing.Size(649, 349);
+        MatriculasGBX.Padding = new Padding(3, 0, 3, 3);
+        MatriculasGBX.Size = new System.Drawing.Size(707, 391);
         MatriculasGBX.TabIndex = 10;
         MatriculasGBX.TabStop = false;
         MatriculasGBX.Text = "Matrículas";
@@ -147,7 +153,7 @@ partial class ImportarMatriculasView
         dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
         MatriculasDGV.DefaultCellStyle = dataGridViewCellStyle2;
         MatriculasDGV.Dock = DockStyle.Fill;
-        MatriculasDGV.Location = new System.Drawing.Point(3, 44);
+        MatriculasDGV.Location = new System.Drawing.Point(3, 49);
         MatriculasDGV.Name = "MatriculasDGV";
         MatriculasDGV.ReadOnly = true;
         dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -162,31 +168,67 @@ partial class ImportarMatriculasView
         MatriculasDGV.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
         MatriculasDGV.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
         MatriculasDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-        MatriculasDGV.Size = new System.Drawing.Size(643, 302);
+        MatriculasDGV.Size = new System.Drawing.Size(701, 339);
         MatriculasDGV.TabIndex = 7;
         MatriculasDGV.CellClick += MatriculasDGV_CellClick;
         MatriculasDGV.ColumnHeaderMouseClick += MatriculasDGV_ColumnHeaderMouseClick;
         // 
         // PainelOpcoesPNL
         // 
+        PainelOpcoesPNL.BackColor = System.Drawing.SystemColors.ControlLight;
+        PainelOpcoesPNL.Controls.Add(BarraFerramentasMatriculasTST);
         PainelOpcoesPNL.Controls.Add(ApenasComCertificadosCHK);
         PainelOpcoesPNL.Dock = DockStyle.Top;
-        PainelOpcoesPNL.Location = new System.Drawing.Point(3, 19);
+        PainelOpcoesPNL.Location = new System.Drawing.Point(3, 16);
         PainelOpcoesPNL.Name = "PainelOpcoesPNL";
-        PainelOpcoesPNL.Padding = new Padding(10, 0, 0, 0);
-        PainelOpcoesPNL.Size = new System.Drawing.Size(643, 25);
-        PainelOpcoesPNL.TabIndex = 8;
+        PainelOpcoesPNL.Padding = new Padding(10, 3, 10, 3);
+        PainelOpcoesPNL.Size = new System.Drawing.Size(701, 33);
+        PainelOpcoesPNL.TabIndex = 10;
+        // 
+        // BarraFerramentasMatriculasTST
+        // 
+        BarraFerramentasMatriculasTST.BackColor = System.Drawing.SystemColors.ControlLight;
+        BarraFerramentasMatriculasTST.Dock = DockStyle.Fill;
+        BarraFerramentasMatriculasTST.Items.AddRange(new ToolStripItem[] { PesquisarLBL, PesquisarTXT, LimparBTN });
+        BarraFerramentasMatriculasTST.Location = new System.Drawing.Point(10, 3);
+        BarraFerramentasMatriculasTST.Name = "BarraFerramentasMatriculasTST";
+        BarraFerramentasMatriculasTST.Padding = new Padding(0, 0, 5, 0);
+        BarraFerramentasMatriculasTST.Size = new System.Drawing.Size(430, 27);
+        BarraFerramentasMatriculasTST.TabIndex = 1;
+        BarraFerramentasMatriculasTST.Text = "toolStrip1";
+        // 
+        // PesquisarLBL
+        // 
+        PesquisarLBL.Image = Properties.Resources.ProcurarVerde;
+        PesquisarLBL.ImageTransparentColor = System.Drawing.Color.Magenta;
+        PesquisarLBL.Name = "PesquisarLBL";
+        PesquisarLBL.Size = new System.Drawing.Size(73, 24);
+        PesquisarLBL.Text = "Pesquisar";
+        // 
+        // PesquisarTXT
+        // 
+        PesquisarTXT.Name = "PesquisarTXT";
+        PesquisarTXT.Size = new System.Drawing.Size(250, 27);
+        // 
+        // LimparBTN
+        // 
+        LimparBTN.Alignment = ToolStripItemAlignment.Right;
+        LimparBTN.Image = Properties.Resources.LimparVermelho;
+        LimparBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
+        LimparBTN.Name = "LimparBTN";
+        LimparBTN.Size = new System.Drawing.Size(64, 24);
+        LimparBTN.Text = "Limpar";
+        LimparBTN.Click += LimparBTN_Click;
         // 
         // ApenasComCertificadosCHK
         // 
-        ApenasComCertificadosCHK.Dock = DockStyle.Left;
-        ApenasComCertificadosCHK.Location = new System.Drawing.Point(10, 0);
+        ApenasComCertificadosCHK.Dock = DockStyle.Right;
+        ApenasComCertificadosCHK.Location = new System.Drawing.Point(440, 3);
         ApenasComCertificadosCHK.Name = "ApenasComCertificadosCHK";
-        ApenasComCertificadosCHK.Size = new System.Drawing.Size(251, 25);
+        ApenasComCertificadosCHK.Size = new System.Drawing.Size(251, 27);
         ApenasComCertificadosCHK.TabIndex = 0;
         ApenasComCertificadosCHK.Text = "Exibir apenas matriculas com Certificados";
         ApenasComCertificadosCHK.UseVisualStyleBackColor = true;
-        ApenasComCertificadosCHK.CheckedChanged += ApenasComCertificadosCHK_CheckedChanged;
         // 
         // panel1
         // 
@@ -199,7 +241,7 @@ partial class ImportarMatriculasView
         panel1.Dock = DockStyle.Top;
         panel1.Location = new System.Drawing.Point(3, 19);
         panel1.Name = "panel1";
-        panel1.Size = new System.Drawing.Size(649, 91);
+        panel1.Size = new System.Drawing.Size(707, 91);
         panel1.TabIndex = 9;
         // 
         // DiretorioMatriculasLBL
@@ -217,7 +259,7 @@ partial class ImportarMatriculasView
         DiretorioMatriculasTXT.Location = new System.Drawing.Point(4, 18);
         DiretorioMatriculasTXT.Name = "DiretorioMatriculasTXT";
         DiretorioMatriculasTXT.ReadOnly = true;
-        DiretorioMatriculasTXT.Size = new System.Drawing.Size(613, 23);
+        DiretorioMatriculasTXT.Size = new System.Drawing.Size(671, 23);
         DiretorioMatriculasTXT.TabIndex = 0;
         DiretorioMatriculasTXT.TextChanged += DiretorioMatriculasTXT_TextChanged;
         // 
@@ -226,7 +268,7 @@ partial class ImportarMatriculasView
         ImportarCertificadosBTN.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         ImportarCertificadosBTN.BackgroundImage = Properties.Resources.ProcurarVerde;
         ImportarCertificadosBTN.BackgroundImageLayout = ImageLayout.Zoom;
-        ImportarCertificadosBTN.Location = new System.Drawing.Point(617, 61);
+        ImportarCertificadosBTN.Location = new System.Drawing.Point(675, 61);
         ImportarCertificadosBTN.Name = "ImportarCertificadosBTN";
         ImportarCertificadosBTN.Size = new System.Drawing.Size(26, 25);
         ImportarCertificadosBTN.TabIndex = 5;
@@ -239,7 +281,7 @@ partial class ImportarMatriculasView
         DiretorioCertificadosTXT.Location = new System.Drawing.Point(4, 62);
         DiretorioCertificadosTXT.Name = "DiretorioCertificadosTXT";
         DiretorioCertificadosTXT.ReadOnly = true;
-        DiretorioCertificadosTXT.Size = new System.Drawing.Size(613, 23);
+        DiretorioCertificadosTXT.Size = new System.Drawing.Size(671, 23);
         DiretorioCertificadosTXT.TabIndex = 1;
         // 
         // ImportarMatriculasBTN
@@ -247,7 +289,7 @@ partial class ImportarMatriculasView
         ImportarMatriculasBTN.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         ImportarMatriculasBTN.BackgroundImage = Properties.Resources.ProcurarVerde;
         ImportarMatriculasBTN.BackgroundImageLayout = ImageLayout.Zoom;
-        ImportarMatriculasBTN.Location = new System.Drawing.Point(617, 17);
+        ImportarMatriculasBTN.Location = new System.Drawing.Point(675, 17);
         ImportarMatriculasBTN.Name = "ImportarMatriculasBTN";
         ImportarMatriculasBTN.Size = new System.Drawing.Size(26, 25);
         ImportarMatriculasBTN.TabIndex = 4;
@@ -267,9 +309,9 @@ partial class ImportarMatriculasView
         // 
         BarraFerramentasTST.Dock = DockStyle.Bottom;
         BarraFerramentasTST.Items.AddRange(new ToolStripItem[] { CancelarBTN, ConfirmarBTN, FeedbackLBL });
-        BarraFerramentasTST.Location = new System.Drawing.Point(5, 589);
+        BarraFerramentasTST.Location = new System.Drawing.Point(5, 631);
         BarraFerramentasTST.Name = "BarraFerramentasTST";
-        BarraFerramentasTST.Size = new System.Drawing.Size(655, 25);
+        BarraFerramentasTST.Size = new System.Drawing.Size(713, 25);
         BarraFerramentasTST.TabIndex = 4;
         BarraFerramentasTST.Text = "toolStrip1";
         // 
@@ -303,7 +345,7 @@ partial class ImportarMatriculasView
         // 
         AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new System.Drawing.Size(665, 619);
+        ClientSize = new System.Drawing.Size(723, 661);
         Controls.Add(ImportacaoGBX);
         Controls.Add(OrientacoesGBX);
         Controls.Add(BarraFerramentasTST);
@@ -312,13 +354,16 @@ partial class ImportarMatriculasView
         Padding = new Padding(5);
         StartPosition = FormStartPosition.CenterScreen;
         Text = "CertFlow - Importar Matriculas";
-        Activated += ImportarMatriculasView_Activated;
+        Load += ImportarMatriculasView_Load;
         ((System.ComponentModel.ISupportInitialize)ImagemSelecaoArquivoIMG).EndInit();
         OrientacoesGBX.ResumeLayout(false);
         ImportacaoGBX.ResumeLayout(false);
         MatriculasGBX.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)MatriculasDGV).EndInit();
         PainelOpcoesPNL.ResumeLayout(false);
+        PainelOpcoesPNL.PerformLayout();
+        BarraFerramentasMatriculasTST.ResumeLayout(false);
+        BarraFerramentasMatriculasTST.PerformLayout();
         panel1.ResumeLayout(false);
         panel1.PerformLayout();
         BarraFerramentasTST.ResumeLayout(false);
@@ -347,5 +392,9 @@ partial class ImportarMatriculasView
     private ToolStripLabel FeedbackLBL;
     private GroupBox MatriculasGBX;
     private Panel PainelOpcoesPNL;
+    private ToolStrip BarraFerramentasMatriculasTST;
+    private ToolStripLabel PesquisarLBL;
+    private ToolStripTextBox PesquisarTXT;
     private CheckBox ApenasComCertificadosCHK;
+    private ToolStripButton LimparBTN;
 }

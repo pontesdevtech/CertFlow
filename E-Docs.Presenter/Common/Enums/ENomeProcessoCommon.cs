@@ -3,5 +3,6 @@ public enum ENomeProcessoCommon
 {
     CarregarMatriculas = 0,
     CarregarCertificados = 1,
-    FormatarTabela = 2
+    FormatarTabela = 2,
+    EnviarEmail = 3
 }

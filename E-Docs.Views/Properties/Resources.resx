@@ -118,14 +118,23 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ImportarCinza" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImportarCinza.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SalvarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SalvarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Aviso" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Aviso.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ProcurarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ProcurarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="CancelarVermelho" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CancelarVermelho.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="CertificadoVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CertificadoVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ErroVermelho" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ErroVermelho.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ConfirmarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ConfirmarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -133,31 +142,25 @@
   <data name="DeleteVermelho" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\DeleteVermelho.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="EmailVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmailVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="EnviarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EnviarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ErroVermelho" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ErroVermelho.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ImportarCinza" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ImportarCinza.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ImportarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ImportarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="PendenteVermelho" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\PendenteVermelho.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ProcurarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ProcurarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="EnviarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EnviarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EmailVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EmailVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="RelatorioVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\RelatorioVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="SalvarVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\SalvarVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="CertificadoVerde" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CertificadoVerde.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LimparVermelho" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LimparVermelho.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

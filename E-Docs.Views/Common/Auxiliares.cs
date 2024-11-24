@@ -1,6 +1,7 @@
 ﻿using E_Docs.Presenter.DTOs;
 using E_Docs.Presenter.Mappings;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -44,21 +45,26 @@ public static class Auxiliares
         return (total, selecionados, $"Registros Selecionados: {selecionados}/{total}");
     }
 
-    public static void IdentificarMatriculasComCertificado(DataGridView dgv, List<CertificadoDTO> certificados)
+    public static List<CertificadoDTO> IdentificarMatriculasComCertificado(DataGridView dgv, List<CertificadoDTO> certificados)
     {
+        List<CertificadoDTO> certificadosFiltro = [];
+
         foreach (DataGridViewRow row in dgv.Rows)
         {
             string? aluno = row.Cells["Aluno"].Value.ToString();
-            if (certificados.FirstOrDefault(x => x.NomeAluno.Equals(aluno.Split(" - ")[1])) != null)
+            var certificado = certificados.FirstOrDefault(x => x.NomeAluno.Equals(aluno.Split(" - ")[1]));
+            if (certificado != null)
             {
                 row.Cells["Certificado"].Value = Properties.Resources.CertificadoVerde;
                 row.Cells["Unidade"].Value = certificados.FirstOrDefault(x => x.NomeAluno.Equals(aluno.Split(" - ")[1])).Unidade;
+                certificadosFiltro.Add(certificado);
             }
             else
             {
                 row.Cells["Certificado"].Value = Properties.Resources.PendenteVermelho;
             }
         }
+        return certificadosFiltro;
     }
 
     public static void IdentificarEmailsEnviados(DataGridView dgv, List<EmailDTO> emails)

@@ -163,6 +163,16 @@ namespace E_Docs.Views.Properties {
         /// <summary>
         ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap LimparVermelho {
+            get {
+                object obj = ResourceManager.GetObject("LimparVermelho", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta um recurso localizado do tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap PendenteVermelho {
             get {
                 object obj = ResourceManager.GetObject("PendenteVermelho", resourceCulture);

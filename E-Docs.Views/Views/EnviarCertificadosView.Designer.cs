@@ -28,6 +28,7 @@ partial class EnviarCertificadosView
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnviarCertificadosView));
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -159,7 +160,7 @@ partial class EnviarCertificadosView
         // 
         TagsCBX.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         TagsCBX.FormattingEnabled = true;
-        TagsCBX.Items.AddRange(new object[] { "ALUNO", "RA", "CURSO", "PERIODO", "UNIDADE" });
+        TagsCBX.Items.AddRange(new object[] { "ALUNO", "RA", "CPF", "CURSO", "PERIODO", "UNIDADE" });
         TagsCBX.Location = new System.Drawing.Point(617, 18);
         TagsCBX.Name = "TagsCBX";
         TagsCBX.Size = new System.Drawing.Size(165, 23);
@@ -182,8 +183,8 @@ partial class EnviarCertificadosView
         MensagemTXT.Name = "MensagemTXT";
         MensagemTXT.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
         MensagemTXT.Size = new System.Drawing.Size(507, 155);
-        MensagemTXT.TabIndex = 15;
-        MensagemTXT.TextChanged += MensagemTXT_TextChanged;
+        MensagemTXT.TabIndex = 5;
+        MensagemTXT.Text = resources.GetString("MensagemTXT.Text");
         // 
         // MensagemLBL
         // 
@@ -199,8 +200,7 @@ partial class EnviarCertificadosView
         CcoTXT.Location = new System.Drawing.Point(6, 172);
         CcoTXT.Name = "CcoTXT";
         CcoTXT.Size = new System.Drawing.Size(244, 23);
-        CcoTXT.TabIndex = 13;
-        CcoTXT.TextChanged += CcoTXT_TextChanged;
+        CcoTXT.TabIndex = 4;
         // 
         // CcoLBL
         // 
@@ -217,7 +217,8 @@ partial class EnviarCertificadosView
         SenhaTXT.Name = "SenhaTXT";
         SenhaTXT.PasswordChar = '*';
         SenhaTXT.Size = new System.Drawing.Size(244, 23);
-        SenhaTXT.TabIndex = 11;
+        SenhaTXT.TabIndex = 2;
+        SenhaTXT.Text = "TpKj@2212cdm03";
         // 
         // SenhaLBL
         // 
@@ -233,8 +234,7 @@ partial class EnviarCertificadosView
         CcTXT.Location = new System.Drawing.Point(6, 128);
         CcTXT.Name = "CcTXT";
         CcTXT.Size = new System.Drawing.Size(244, 23);
-        CcTXT.TabIndex = 9;
-        CcTXT.TextChanged += CcTXT_TextChanged;
+        CcTXT.TabIndex = 3;
         // 
         // CcLBL
         // 
@@ -250,8 +250,8 @@ partial class EnviarCertificadosView
         RemetenteTXT.Location = new System.Drawing.Point(6, 40);
         RemetenteTXT.Name = "RemetenteTXT";
         RemetenteTXT.Size = new System.Drawing.Size(244, 23);
-        RemetenteTXT.TabIndex = 3;
-        RemetenteTXT.TextChanged += RemetenteTXT_TextChanged;
+        RemetenteTXT.TabIndex = 1;
+        RemetenteTXT.Text = "tiago.cdm@senaipa.org.br";
         // 
         // RemetenteLBL
         // 
@@ -329,7 +329,6 @@ partial class EnviarCertificadosView
         Padding = new System.Windows.Forms.Padding(5);
         StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
         Text = "CertFlow - Enviar Certificados";
-        Activated += EnviarCertificadosView_Activated;
         Load += EnviarCertificadosView_Load;
         OrientacoesGBX.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)ImagemEnvioCertificadoIMG).EndInit();

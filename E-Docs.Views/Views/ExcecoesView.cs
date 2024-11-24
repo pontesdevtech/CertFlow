@@ -16,4 +16,9 @@ public partial class ExcecoesView : Form
     {
         Close();
     }
+
+    private void ExcecoesView_Load(object sender, EventArgs e)
+    {
+
+    }
 }
