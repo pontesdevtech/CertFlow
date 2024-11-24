@@ -31,20 +31,6 @@ public partial class ImportarMatriculasView : Form
         if (DiretorioMatriculasTXT.Text != string.Empty)
         {
             var retorno = ImportarMatriculasService.ImportarMatriculas(DiretorioMatriculasTXT.Text, MatriculasDGV);
-            //if (retorno.logs.Count > 0)
-            //{
-            //    ExcecoesView excecoesView = new();
-            //    var contador = 1;
-            //    foreach (var log in retorno.logs)
-            //    {
-            //        if (contador == 1) excecoesView.Text = log.GetMensagem().titulo;
-            //        if (contador == 1) excecoesView.MensagemErroLBL.Text = log.GetMensagem().mensagem;
-            //        excecoesView.InformacoesBasicasTXT.Text += log.GetMensagem().informacoesBasicas;
-            //        excecoesView.InformacoesTecnicasTXT.Text += log.GetMensagem().informacoesTecnicas;
-            //        contador++;
-            //    }
-            //    excecoesView.ShowDialog();
-            //}
 
             if (retorno.matriculas.Count == 0 && retorno.logs.Count > 0)
             {
@@ -86,21 +72,6 @@ public partial class ImportarMatriculasView : Form
             Certificados.Clear();
             var retorno = ImportarCertificadosService.ImportarCertificados(DiretorioCertificadosTXT.Text, ConfiguracaoCommon.pswd(), Matriculas);
             Certificados = retorno.certificados ?? Certificados;
-
-            //if (retorno.logs.Count > 0)
-            //{
-            //    ExcecoesView excecoesView = new();
-            //    var contador = 1;
-            //    foreach (var log in retorno.logs)
-            //    {
-            //        if (contador == 1) excecoesView.Text = log.GetMensagem().titulo;
-            //        if (contador == 1) excecoesView.MensagemErroLBL.Text = log.GetMensagem().mensagem;
-            //        excecoesView.InformacoesBasicasTXT.Text += log.GetMensagem().informacoesBasicas;
-            //        excecoesView.InformacoesTecnicasTXT.Text += log.GetMensagem().informacoesTecnicas;
-            //        contador++;
-            //    }
-            //    excecoesView.ShowDialog();
-            //}
 
             if (Certificados.Count == 0 && retorno.logs.Count > 0)
             {
@@ -286,5 +257,14 @@ public partial class ImportarMatriculasView : Form
         ConfirmarBTN.Enabled = false;
         Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasDGV, Matriculas, Certificados, FeedbackLBL);
         if (MatriculasDGV.Columns.Contains("[X]")) MatriculasDGV.Columns["[X]"].Frozen = true;
+    }
+
+    private void PesquisarTXT_TextChanged(object sender, EventArgs e)
+    {
+        var filtro = Matriculas.Where(x => x.Aluno.ToLower().Contains(PesquisarTXT.Text.ToLower()) ||
+                                          x.Cpf.Contains(PesquisarTXT.Text) ||
+                                          x.Email.ToLower().Contains(PesquisarTXT.Text.ToLower())).ToList();
+
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasDGV, filtro, Certificados, FeedbackLBL);
     }
 }

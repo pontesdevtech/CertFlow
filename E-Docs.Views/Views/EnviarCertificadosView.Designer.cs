@@ -28,7 +28,6 @@ partial class EnviarCertificadosView
     /// </summary>
     private void InitializeComponent()
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EnviarCertificadosView));
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
         System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -184,7 +183,6 @@ partial class EnviarCertificadosView
         MensagemTXT.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
         MensagemTXT.Size = new System.Drawing.Size(507, 155);
         MensagemTXT.TabIndex = 5;
-        MensagemTXT.Text = resources.GetString("MensagemTXT.Text");
         // 
         // MensagemLBL
         // 
@@ -218,7 +216,6 @@ partial class EnviarCertificadosView
         SenhaTXT.PasswordChar = '*';
         SenhaTXT.Size = new System.Drawing.Size(244, 23);
         SenhaTXT.TabIndex = 2;
-        SenhaTXT.Text = "TpKj@2212cdm03";
         // 
         // SenhaLBL
         // 
@@ -251,7 +248,6 @@ partial class EnviarCertificadosView
         RemetenteTXT.Name = "RemetenteTXT";
         RemetenteTXT.Size = new System.Drawing.Size(244, 23);
         RemetenteTXT.TabIndex = 1;
-        RemetenteTXT.Text = "tiago.cdm@senaipa.org.br";
         // 
         // RemetenteLBL
         // 

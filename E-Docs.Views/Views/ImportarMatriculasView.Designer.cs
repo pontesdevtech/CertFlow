@@ -209,6 +209,7 @@ partial class ImportarMatriculasView
         // 
         PesquisarTXT.Name = "PesquisarTXT";
         PesquisarTXT.Size = new System.Drawing.Size(250, 27);
+        PesquisarTXT.TextChanged += PesquisarTXT_TextChanged;
         // 
         // LimparBTN
         // 

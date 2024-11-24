@@ -1,6 +1,5 @@
 using E_Docs.Domain.Entities;
 using E_Docs.Presenter.DTOs;
-using E_Docs.Presenter.Mappings;
 using E_Docs.Views.Common;
 using E_Docs.Views.Views;
 using System;
@@ -17,7 +16,6 @@ public partial class PrincipalView : Form
     public List<CertificadoDTO> Certificados = [];
     public List<MatriculaDTO> Matriculas = [];
     public string? Diretorio { get; set; } = string.Empty;
-
     public readonly string Provedor = "smtp.office365.com";
     public readonly int Porta = 587;
     public string Usuario { get; set; } = string.Empty;
@@ -196,5 +194,14 @@ public partial class PrincipalView : Form
         if (MatriculasSelecionadasDGV.Rows.Count > 0) Matriculas.Clear();
         Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasSelecionadasDGV, Matriculas, Certificados, FeedbackLBL);
         if (MatriculasSelecionadasDGV.Columns.Contains("[X]")) MatriculasSelecionadasDGV.Columns["[X]"].Frozen = true;
+    }
+
+    private void PesquisarTXT_TextChanged(object sender, EventArgs e)
+    {
+        var filtro = Matriculas.Where(x => x.Aluno.ToLower().Contains(PesquisarTXT.Text.ToLower()) ||
+                                           x.Cpf.Contains(PesquisarTXT.Text) ||
+                                           x.Email.ToLower().Contains(PesquisarTXT.Text.ToLower())).ToList();
+
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasSelecionadasDGV, filtro, Certificados, FeedbackLBL);
     }
 }

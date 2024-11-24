@@ -137,6 +137,7 @@ partial class PrincipalView
         // 
         PesquisarTXT.Name = "PesquisarTXT";
         PesquisarTXT.Size = new System.Drawing.Size(300, 27);
+        PesquisarTXT.TextChanged += PesquisarTXT_TextChanged;
         // 
         // LimparBTN
         // 

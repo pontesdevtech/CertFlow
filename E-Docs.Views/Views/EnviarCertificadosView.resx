@@ -120,15 +120,4 @@
   <metadata name="BarraFerramentasTST.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>609, 17</value>
   </metadata>
-  <data name="MensagemTXT.Text" xml:space="preserve">
-    <value>Prezado(a) [ALUNO],
-
-Queremos lhe parabenizar pela conclusão do curso [CURSO] realizando aqui no [UNIDADE]. Seu certificado segue anexo a este email e a senha para desbloqueá-lo é seu CPF.
-
-Conte conosco para elevar seus conhecimentos profissionais.
-#VEMPARAOSENAI
-
-CPF:[CPF]
-RA: [RA]</value>
-  </data>
 </root>
