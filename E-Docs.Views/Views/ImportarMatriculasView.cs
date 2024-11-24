@@ -54,14 +54,20 @@ public partial class ImportarMatriculasView : Form
                 Matriculas = retorno.matriculas;
                 Certificados.Clear();
                 DiretorioCertificadosTXT.Text = string.Empty;
-                // Carrega a imagem de pendente para todos os registros de matrículas
-                foreach (DataGridViewRow row in MatriculasDGV.Rows) row.Cells["Certificado"].Value = Properties.Resources.PendenteVermelho;
+                // Carrega a imagem de pendente para todos os registros de matrículas e aplica o valor fallso para a coluna de caixa de seleção
+                foreach (DataGridViewRow row in MatriculasDGV.Rows)
+                {
+                    row.Cells["[X]"].Value = false;
+                    row.Cells["Certificado"].Value = Properties.Resources.PendenteVermelho;
+
+                }
                 // Carrega os certificados identificados na importação da matrícula, se houver
                 Certificados = retorno.certificados;
             }
             // Se forem encontrados certificados vinculados às matrículas importadas, carrega-os no datagridview
             if (Certificados.Count > 0) Auxiliares.IdentificarMatriculasComCertificado(MatriculasDGV, Certificados);
 
+            if (MatriculasDGV.Columns.Contains("[X]")) MatriculasDGV.Columns["[X]"].Frozen = true;
             var feedback = Auxiliares.ContarRegistros(MatriculasDGV);
             FeedbackLBL.Text = feedback.feedback;
         }
@@ -76,6 +82,7 @@ public partial class ImportarMatriculasView : Form
 
         if (DiretorioCertificadosTXT.Text != string.Empty)
         {
+            Certificados.Clear();
             var retorno = ImportarCertificadosService.ImportarCertificados(DiretorioCertificadosTXT.Text, ConfiguracaoCommon.pswd(), Matriculas);
             Certificados = retorno.certificados ?? Certificados;
 
@@ -102,6 +109,7 @@ public partial class ImportarMatriculasView : Form
             {
                 Auxiliares.IdentificarMatriculasComCertificado(MatriculasDGV, Certificados);
             }
+            if (MatriculasDGV.Columns.Contains("[X]")) MatriculasDGV.Columns["[X]"].Frozen = true;
             var feedback = Auxiliares.ContarRegistros(MatriculasDGV);
             FeedbackLBL.Text = feedback.feedback;
         }
@@ -120,15 +128,6 @@ public partial class ImportarMatriculasView : Form
         {
             ImportarCertificadosBTN.Enabled = true;
         }
-    }
-
-    /// <summary>
-    /// Executa as ações relacioandas ao evento de abertura do formulário
-    /// </summary>
-    private void ImportarMatriculasView_Load(object sender, EventArgs e)
-    {
-        ImportarCertificadosBTN.Enabled = false;
-        ConfirmarBTN.Enabled = false;
     }
 
     /// <summary>
@@ -194,7 +193,8 @@ public partial class ImportarMatriculasView : Form
     /// </summary>
     private void ApenasComCertificadosCHK_CheckedChanged(object sender, EventArgs e)
     {
-        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK, MatriculasDGV, Matriculas, Certificados, FeedbackLBL);
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasDGV, Matriculas, Certificados, FeedbackLBL);
+        if (MatriculasDGV.Columns.Contains("[X]")) MatriculasDGV.Columns["[X]"].Frozen = true;
     }
 
     /// <summary>
@@ -245,14 +245,7 @@ public partial class ImportarMatriculasView : Form
                     Convert.ToBoolean(linha.Cells["[X]"].Value) &&
                     !string.IsNullOrEmpty(linha.Cells["Unidade"].Value?.ToString()));
 
-        if (count > 0)
-        {
-            ConfirmarBTN.Enabled = true;
-        }
-        else
-        {
-            ConfirmarBTN.Enabled = false;
-        }
+        ConfirmarBTN.Enabled = count > 0 ? true : false;
     }
 
     /// <summary>
@@ -268,6 +261,19 @@ public partial class ImportarMatriculasView : Form
         TelaPrincipal.Dt = Conversao.ConvertDataGridViewToDataTable(MatriculasDGV);
         TelaPrincipal.MatriculasSelecionadasDGV.DataSource = TelaPrincipal.Dt;
         FormatacaoCommon.FormatarDgv(TelaPrincipal.MatriculasSelecionadasDGV);
+        Auxiliares.IdentificarMatriculasComCertificado(TelaPrincipal.MatriculasSelecionadasDGV, Certificados);
+        TelaPrincipal.Certificados = Certificados;
+        TelaPrincipal.Matriculas = Matriculas;
+        Auxiliares.IdentificarEmailsEnviados(TelaPrincipal.MatriculasSelecionadasDGV, new());
         Close();
+    }
+
+    /// <summary>
+    /// Executa as ações relacioandas ao evento de ativação do formulário
+    /// </summary>
+    private void ImportarMatriculasView_Activated(object sender, EventArgs e)
+    {
+        ImportarCertificadosBTN.Enabled = false;
+        ConfirmarBTN.Enabled = false;
     }
 }

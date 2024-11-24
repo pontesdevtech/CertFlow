@@ -30,6 +30,7 @@ public static class FormatacaoCommon
                     dgv.Columns["[X]"].DisplayIndex = 0; // Desloca essa coluna para o início do datagridview
                     dgv.Columns["[X]"].Width = 30;
                     dgv.Columns["[X]"].ReadOnly = false;
+                    dgv.Columns["[X]"].Visible = true;
                 }
 
                 if (dgv.Columns.Contains(dgv.Columns["Aluno"])) dgv.Columns["Aluno"].Width = 250;
@@ -67,6 +68,7 @@ public static class FormatacaoCommon
                     dgv.Columns["[X]"].DisplayIndex = 0; // Desloca essa coluna para o início do datagridview
                     dgv.Columns["[X]"].Width = 30;
                     dgv.Columns["[X]"].ReadOnly = false;
+                    dgv.Columns["[X]"].Visible = true;
                 }
 
                 if (dgv.Columns.Contains(dgv.Columns["Aluno"])) dgv.Columns["Aluno"].Width = 250;
@@ -90,7 +92,42 @@ public static class FormatacaoCommon
                 if (dgv.Columns.Contains(dgv.Columns["Envio"]))
                 {
                     dgv.Columns["Envio"].Width = 80;
-                    dgv.Columns["Envio"].Visible = true; // Remove a visibilidade da coluna nesta visão
+                    dgv.Columns["Envio"].Visible = true;
+                }
+            }
+
+            if (dgv.FindForm() is EnviarCertificadosView)
+            {
+                if (dgv.Columns.Contains(dgv.Columns["[X]"]))
+                {
+                    dgv.Columns["[X]"].DisplayIndex = 0; // Desloca essa coluna para o início do datagridview
+                    dgv.Columns["[X]"].Width = 30;
+                    dgv.Columns["[X]"].ReadOnly = true;
+                    dgv.Columns["[X]"].Visible = false;
+                }
+
+                if (dgv.Columns.Contains(dgv.Columns["Aluno"])) dgv.Columns["Aluno"].Width = 250;
+
+                if (dgv.Columns.Contains(dgv.Columns["CPF"])) dgv.Columns["CPF"].Width = 100;
+
+                if (dgv.Columns.Contains(dgv.Columns["Email"])) dgv.Columns["Email"].Width = 250;
+
+                if (dgv.Columns.Contains(dgv.Columns["Turma"])) dgv.Columns["Turma"].Width = 80;
+
+                if (dgv.Columns.Contains(dgv.Columns["Curso"])) dgv.Columns["Curso"].Width = 300;
+
+                if (dgv.Columns.Contains(dgv.Columns["Unidade"]))
+                {
+                    dgv.Columns["Unidade"].Width = 250;
+                    dgv.Columns["Unidade"].Visible = false;
+                }
+
+                if (dgv.Columns.Contains(dgv.Columns["Certificado"])) dgv.Columns["Certificado"].Width = 80;
+
+                if (dgv.Columns.Contains(dgv.Columns["Envio"]))
+                {
+                    dgv.Columns["Envio"].Width = 80;
+                    dgv.Columns["Envio"].Visible = true;
                 }
             }
         }

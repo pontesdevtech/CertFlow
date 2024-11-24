@@ -42,7 +42,7 @@ public static class CertificadoService
 
                 string senha;
 
-                // Se o nome do aluno identificado no arquivo existir na lista de matrículas se o arquivo ainda não foi criptografado:
+                // Se o nome do aluno identificado no arquivo existir na lista de matrículas:
                 if(matriculas.FirstOrDefault(x => x.Nome == certificado.NomeAluno) != null)
                 {
                     // Atribui o valor do identificador (CPF do aluno) à variável senha
@@ -52,6 +52,8 @@ public static class CertificadoService
                     DefinirSenha($"{diretorio}{certificado.NomeAluno}.pdf", $"{diretorio}\\Criptografados\\[PROTEGIDO] {certificado.NomeAluno}.pdf", senha, senhaAdmin);
                     // Atualiza o nome do documento no objeto
                     certificado.NomeArquivo = $"[PROTEGIDO] {certificado.NomeAluno}.pdf";
+                    // vincula a matrícula ao certificado
+                    certificado.Matricula = matriculas.FirstOrDefault(x => x.Nome == certificado.NomeAluno);
                     // Adiciona o arquivo à lista
                     certificados.Add(certificado);
                 }
@@ -112,8 +114,8 @@ public static class CertificadoService
                 {
                     if (contador > matriculas.Count) break;
                  
-                    if(matriculas.Any(x => x.Nome.Equals(Path.GetFileNameWithoutExtension(arquivo))))
-                    {
+                    //if(matriculas.Any(x => x.Nome.Equals(Path.GetFileNameWithoutExtension(arquivo))))
+                    //{
 
                     // Divide o texto do arquivo PDF em linhas e as armazena em um array de linhas
                     string[] linhasTexto = ExtrairTextoDoPDF(arquivo, senhaAdmin).Split("\n");
@@ -132,7 +134,7 @@ public static class CertificadoService
                         // Adiciona cada arquivo carregado a lista geral
                         certificados.Add(certificado);
                         contador++;
-                    }
+                    //}
                 }
                 return certificados;
             }

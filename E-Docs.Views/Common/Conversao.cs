@@ -1,4 +1,5 @@
-﻿using System;
+﻿using iText.Layout.Element;
+using System;
 using System.Data;
 using System.Windows.Forms;
 
@@ -13,7 +14,10 @@ public static class Conversao
         // Adicionar colunas ao DataTable com base nas colunas do DataGridView
         foreach (DataGridViewColumn column in dgv.Columns)
         {
-            dataTable.Columns.Add(column.Name, column.ValueType ?? typeof(string));
+            if (column.Name != "[X]" && column.Name != "Unidade" && column.Name != "Certificado" && column.Name != "Envio")
+            {
+                dataTable.Columns.Add(column.Name, column.ValueType ?? typeof(string));
+            }
         }
 
         // Adicionar linhas ao DataTable com base nas linhas do DataGridView
@@ -25,7 +29,10 @@ public static class Conversao
                 DataRow dataRow = dataTable.NewRow();
                 foreach (DataGridViewColumn column in dgv.Columns)
                 {
-                    dataRow[column.Name] = row.Cells[column.Name].Value ?? DBNull.Value;
+                    if (column.Name != "[X]" && column.Name != "Unidade" && column.Name != "Certificado" && column.Name != "Envio")
+                    {
+                        dataRow[column.Name] = row.Cells[column.Name].Value ?? DBNull.Value;
+                    }
                 }
                 dataTable.Rows.Add(dataRow);
             }

@@ -30,79 +30,127 @@ partial class PrincipalView
     /// </summary>
     private void InitializeComponent()
     {
-        MatriculasSelecionadasDGV = new System.Windows.Forms.DataGridView();
-        MatriculasGBX = new System.Windows.Forms.GroupBox();
-        BarraStatusFeedback = new System.Windows.Forms.StatusStrip();
-        FeedbackLBL = new System.Windows.Forms.ToolStripStatusLabel();
-        BarraFerramentasMatriculasTST = new System.Windows.Forms.ToolStrip();
-        PesquisarLBL = new System.Windows.Forms.ToolStripLabel();
-        PesquisarTXT = new System.Windows.Forms.ToolStripTextBox();
-        ErroBTN = new System.Windows.Forms.ToolStripButton();
-        CertificadoBTN = new System.Windows.Forms.ToolStripButton();
-        InformacoesGBX = new System.Windows.Forms.GroupBox();
-        EmailTXT = new System.Windows.Forms.TextBox();
-        EmailLBL = new System.Windows.Forms.Label();
-        CpfTXT = new System.Windows.Forms.TextBox();
-        AlunoTXT = new System.Windows.Forms.TextBox();
-        AlunoLBL = new System.Windows.Forms.Label();
-        CpfLBL = new System.Windows.Forms.Label();
-        TurmaTXT = new System.Windows.Forms.TextBox();
-        TurmaLBL = new System.Windows.Forms.Label();
-        CursoTXT = new System.Windows.Forms.TextBox();
-        CursoLBL = new System.Windows.Forms.Label();
-        BarraFerramentasPrincipalTST = new System.Windows.Forms.ToolStrip();
-        LogoLBL = new System.Windows.Forms.ToolStripLabel();
-        toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-        ImportarMatriculasBTN = new System.Windows.Forms.ToolStripButton();
-        EnviarCertificadosBTN = new System.Windows.Forms.ToolStripButton();
-        toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-        ExportarRelatorioCBX = new System.Windows.Forms.ToolStripDropDownButton();
-        PdfBTN = new System.Windows.Forms.ToolStripMenuItem();
-        XlsxBTN = new System.Windows.Forms.ToolStripMenuItem();
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PrincipalView));
+        MatriculasSelecionadasDGV = new DataGridView();
+        MatriculasGBX = new GroupBox();
+        PainelOpcoesPNL = new Panel();
+        BarraFerramentasMatriculasTST = new ToolStrip();
+        PesquisarLBL = new ToolStripLabel();
+        PesquisarTXT = new ToolStripTextBox();
+        ApenasComCertificadosCHK = new CheckBox();
+        BarraStatusFeedback = new StatusStrip();
+        FeedbackLBL = new ToolStripStatusLabel();
+        InformacoesGBX = new GroupBox();
+        EmailTXT = new TextBox();
+        EmailLBL = new Label();
+        CpfTXT = new TextBox();
+        AlunoTXT = new TextBox();
+        AlunoLBL = new Label();
+        CpfLBL = new Label();
+        TurmaTXT = new TextBox();
+        TurmaLBL = new Label();
+        CursoTXT = new TextBox();
+        CursoLBL = new Label();
+        BarraFerramentasPrincipalTST = new ToolStrip();
+        ImportarMatriculasBTN = new ToolStripButton();
+        EnviarCertificadosBTN = new ToolStripButton();
+        toolStripSeparator2 = new ToolStripSeparator();
+        ExportarRelatorioCBX = new ToolStripDropDownButton();
+        PdfBTN = new ToolStripMenuItem();
+        XlsxBTN = new ToolStripMenuItem();
         ((System.ComponentModel.ISupportInitialize)MatriculasSelecionadasDGV).BeginInit();
         MatriculasGBX.SuspendLayout();
-        BarraStatusFeedback.SuspendLayout();
+        PainelOpcoesPNL.SuspendLayout();
         BarraFerramentasMatriculasTST.SuspendLayout();
+        BarraStatusFeedback.SuspendLayout();
         InformacoesGBX.SuspendLayout();
         BarraFerramentasPrincipalTST.SuspendLayout();
-        this.SuspendLayout();
+        SuspendLayout();
         // 
         // MatriculasSelecionadasDGV
         // 
         MatriculasSelecionadasDGV.AllowUserToAddRows = false;
         MatriculasSelecionadasDGV.AllowUserToDeleteRows = false;
         MatriculasSelecionadasDGV.BackgroundColor = System.Drawing.SystemColors.Control;
-        MatriculasSelecionadasDGV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        MatriculasSelecionadasDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        MatriculasSelecionadasDGV.Dock = System.Windows.Forms.DockStyle.Fill;
-        MatriculasSelecionadasDGV.Location = new System.Drawing.Point(3, 44);
+        MatriculasSelecionadasDGV.BorderStyle = BorderStyle.Fixed3D;
+        MatriculasSelecionadasDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        MatriculasSelecionadasDGV.Dock = DockStyle.Fill;
+        MatriculasSelecionadasDGV.Location = new System.Drawing.Point(3, 52);
         MatriculasSelecionadasDGV.Name = "MatriculasSelecionadasDGV";
         MatriculasSelecionadasDGV.ReadOnly = true;
-        MatriculasSelecionadasDGV.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.DodgerBlue;
-        MatriculasSelecionadasDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        MatriculasSelecionadasDGV.RowHeadersVisible = false;
+        MatriculasSelecionadasDGV.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+        MatriculasSelecionadasDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         MatriculasSelecionadasDGV.Size = new System.Drawing.Size(853, 458);
         MatriculasSelecionadasDGV.TabIndex = 0;
-        MatriculasSelecionadasDGV.CellClick += this.MatriculasSelecionadasDGV_CellClick;
-        MatriculasSelecionadasDGV.CellEnter += this.MatriculasSelecionadasDGV_CellEnter;
-        MatriculasSelecionadasDGV.ColumnHeaderMouseClick += this.MatriculasSelecionadasDGV_ColumnHeaderMouseClick;
+        MatriculasSelecionadasDGV.CellClick += MatriculasSelecionadasDGV_CellClick;
+        MatriculasSelecionadasDGV.CellEnter += MatriculasSelecionadasDGV_CellEnter;
+        MatriculasSelecionadasDGV.ColumnHeaderMouseClick += MatriculasSelecionadasDGV_ColumnHeaderMouseClick;
         // 
         // MatriculasGBX
         // 
         MatriculasGBX.Controls.Add(MatriculasSelecionadasDGV);
+        MatriculasGBX.Controls.Add(PainelOpcoesPNL);
         MatriculasGBX.Controls.Add(BarraStatusFeedback);
-        MatriculasGBX.Controls.Add(BarraFerramentasMatriculasTST);
-        MatriculasGBX.Dock = System.Windows.Forms.DockStyle.Fill;
-        MatriculasGBX.Location = new System.Drawing.Point(5, 159);
+        MatriculasGBX.Dock = DockStyle.Fill;
+        MatriculasGBX.Location = new System.Drawing.Point(5, 151);
         MatriculasGBX.Name = "MatriculasGBX";
-        MatriculasGBX.Size = new System.Drawing.Size(859, 527);
+        MatriculasGBX.Size = new System.Drawing.Size(859, 535);
         MatriculasGBX.TabIndex = 1;
         MatriculasGBX.TabStop = false;
         MatriculasGBX.Text = "Matrículas";
         // 
+        // PainelOpcoesPNL
+        // 
+        PainelOpcoesPNL.BackColor = System.Drawing.SystemColors.ControlLight;
+        PainelOpcoesPNL.Controls.Add(BarraFerramentasMatriculasTST);
+        PainelOpcoesPNL.Controls.Add(ApenasComCertificadosCHK);
+        PainelOpcoesPNL.Dock = DockStyle.Top;
+        PainelOpcoesPNL.Location = new System.Drawing.Point(3, 19);
+        PainelOpcoesPNL.Name = "PainelOpcoesPNL";
+        PainelOpcoesPNL.Padding = new Padding(10, 3, 10, 3);
+        PainelOpcoesPNL.Size = new System.Drawing.Size(853, 33);
+        PainelOpcoesPNL.TabIndex = 9;
+        // 
+        // BarraFerramentasMatriculasTST
+        // 
+        BarraFerramentasMatriculasTST.BackColor = System.Drawing.SystemColors.ControlLight;
+        BarraFerramentasMatriculasTST.Dock = DockStyle.Fill;
+        BarraFerramentasMatriculasTST.Items.AddRange(new ToolStripItem[] { PesquisarLBL, PesquisarTXT });
+        BarraFerramentasMatriculasTST.Location = new System.Drawing.Point(10, 3);
+        BarraFerramentasMatriculasTST.Name = "BarraFerramentasMatriculasTST";
+        BarraFerramentasMatriculasTST.Size = new System.Drawing.Size(582, 27);
+        BarraFerramentasMatriculasTST.TabIndex = 1;
+        BarraFerramentasMatriculasTST.Text = "toolStrip1";
+        // 
+        // PesquisarLBL
+        // 
+        PesquisarLBL.Image = Properties.Resources.ProcurarVerde;
+        PesquisarLBL.ImageTransparentColor = System.Drawing.Color.Magenta;
+        PesquisarLBL.Name = "PesquisarLBL";
+        PesquisarLBL.Size = new System.Drawing.Size(73, 24);
+        PesquisarLBL.Text = "Pesquisar";
+        // 
+        // PesquisarTXT
+        // 
+        PesquisarTXT.Name = "PesquisarTXT";
+        PesquisarTXT.Size = new System.Drawing.Size(300, 27);
+        // 
+        // ApenasComCertificadosCHK
+        // 
+        ApenasComCertificadosCHK.Dock = DockStyle.Right;
+        ApenasComCertificadosCHK.Location = new System.Drawing.Point(592, 3);
+        ApenasComCertificadosCHK.Name = "ApenasComCertificadosCHK";
+        ApenasComCertificadosCHK.Size = new System.Drawing.Size(251, 27);
+        ApenasComCertificadosCHK.TabIndex = 0;
+        ApenasComCertificadosCHK.Text = "Exibir apenas matriculas com Certificados";
+        ApenasComCertificadosCHK.UseVisualStyleBackColor = true;
+        ApenasComCertificadosCHK.CheckedChanged += ApenasComCertificadosCHK_CheckedChanged;
+        // 
         // BarraStatusFeedback
         // 
-        BarraStatusFeedback.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { FeedbackLBL });
-        BarraStatusFeedback.Location = new System.Drawing.Point(3, 502);
+        BarraStatusFeedback.Items.AddRange(new ToolStripItem[] { FeedbackLBL });
+        BarraStatusFeedback.Location = new System.Drawing.Point(3, 510);
         BarraStatusFeedback.Name = "BarraStatusFeedback";
         BarraStatusFeedback.Size = new System.Drawing.Size(853, 22);
         BarraStatusFeedback.TabIndex = 2;
@@ -113,49 +161,6 @@ partial class PrincipalView
         FeedbackLBL.Name = "FeedbackLBL";
         FeedbackLBL.Size = new System.Drawing.Size(126, 17);
         FeedbackLBL.Text = "Total de Registros: 0     ";
-        // 
-        // BarraFerramentasMatriculasTST
-        // 
-        BarraFerramentasMatriculasTST.BackColor = System.Drawing.SystemColors.ControlLight;
-        BarraFerramentasMatriculasTST.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { PesquisarLBL, PesquisarTXT, ErroBTN, CertificadoBTN });
-        BarraFerramentasMatriculasTST.Location = new System.Drawing.Point(3, 19);
-        BarraFerramentasMatriculasTST.Name = "BarraFerramentasMatriculasTST";
-        BarraFerramentasMatriculasTST.Size = new System.Drawing.Size(853, 25);
-        BarraFerramentasMatriculasTST.TabIndex = 1;
-        BarraFerramentasMatriculasTST.Text = "toolStrip1";
-        // 
-        // PesquisarLBL
-        // 
-        PesquisarLBL.Image = Properties.Resources.ProcurarVerde;
-        PesquisarLBL.ImageTransparentColor = System.Drawing.Color.Magenta;
-        PesquisarLBL.Name = "PesquisarLBL";
-        PesquisarLBL.Size = new System.Drawing.Size(73, 22);
-        PesquisarLBL.Text = "Pesquisar";
-        // 
-        // PesquisarTXT
-        // 
-        PesquisarTXT.Name = "PesquisarTXT";
-        PesquisarTXT.Size = new System.Drawing.Size(300, 25);
-        // 
-        // ErroBTN
-        // 
-        ErroBTN.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-        ErroBTN.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        ErroBTN.Image = Properties.Resources.PendenteVermelho;
-        ErroBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
-        ErroBTN.Name = "ErroBTN";
-        ErroBTN.Size = new System.Drawing.Size(23, 22);
-        ErroBTN.Text = "Erro";
-        // 
-        // CertificadoBTN
-        // 
-        CertificadoBTN.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-        CertificadoBTN.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        CertificadoBTN.Image = Properties.Resources.CertificadoVerde;
-        CertificadoBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
-        CertificadoBTN.Name = "CertificadoBTN";
-        CertificadoBTN.Size = new System.Drawing.Size(23, 22);
-        CertificadoBTN.Text = "Certificado";
         // 
         // InformacoesGBX
         // 
@@ -169,8 +174,8 @@ partial class PrincipalView
         InformacoesGBX.Controls.Add(TurmaLBL);
         InformacoesGBX.Controls.Add(CursoTXT);
         InformacoesGBX.Controls.Add(CursoLBL);
-        InformacoesGBX.Dock = System.Windows.Forms.DockStyle.Top;
-        InformacoesGBX.Location = new System.Drawing.Point(5, 38);
+        InformacoesGBX.Dock = DockStyle.Top;
+        InformacoesGBX.Location = new System.Drawing.Point(5, 30);
         InformacoesGBX.Name = "InformacoesGBX";
         InformacoesGBX.Size = new System.Drawing.Size(859, 121);
         InformacoesGBX.TabIndex = 2;
@@ -179,7 +184,7 @@ partial class PrincipalView
         // 
         // EmailTXT
         // 
-        EmailTXT.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        EmailTXT.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         EmailTXT.Location = new System.Drawing.Point(608, 84);
         EmailTXT.Name = "EmailTXT";
         EmailTXT.Size = new System.Drawing.Size(244, 23);
@@ -187,7 +192,7 @@ partial class PrincipalView
         // 
         // EmailLBL
         // 
-        EmailLBL.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        EmailLBL.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         EmailLBL.AutoSize = true;
         EmailLBL.Location = new System.Drawing.Point(608, 66);
         EmailLBL.Name = "EmailLBL";
@@ -197,7 +202,7 @@ partial class PrincipalView
         // 
         // CpfTXT
         // 
-        CpfTXT.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        CpfTXT.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         CpfTXT.Location = new System.Drawing.Point(468, 84);
         CpfTXT.Name = "CpfTXT";
         CpfTXT.Size = new System.Drawing.Size(134, 23);
@@ -205,7 +210,7 @@ partial class PrincipalView
         // 
         // AlunoTXT
         // 
-        AlunoTXT.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+        AlunoTXT.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         AlunoTXT.Location = new System.Drawing.Point(6, 84);
         AlunoTXT.Name = "AlunoTXT";
         AlunoTXT.Size = new System.Drawing.Size(456, 23);
@@ -222,7 +227,7 @@ partial class PrincipalView
         // 
         // CpfLBL
         // 
-        CpfLBL.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        CpfLBL.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         CpfLBL.AutoSize = true;
         CpfLBL.Location = new System.Drawing.Point(468, 66);
         CpfLBL.Name = "CpfLBL";
@@ -232,7 +237,7 @@ partial class PrincipalView
         // 
         // TurmaTXT
         // 
-        TurmaTXT.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        TurmaTXT.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         TurmaTXT.Location = new System.Drawing.Point(727, 40);
         TurmaTXT.Name = "TurmaTXT";
         TurmaTXT.Size = new System.Drawing.Size(125, 23);
@@ -240,7 +245,7 @@ partial class PrincipalView
         // 
         // TurmaLBL
         // 
-        TurmaLBL.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        TurmaLBL.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         TurmaLBL.AutoSize = true;
         TurmaLBL.Location = new System.Drawing.Point(727, 22);
         TurmaLBL.Name = "TurmaLBL";
@@ -250,7 +255,7 @@ partial class PrincipalView
         // 
         // CursoTXT
         // 
-        CursoTXT.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+        CursoTXT.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         CursoTXT.Location = new System.Drawing.Point(6, 40);
         CursoTXT.Name = "CursoTXT";
         CursoTXT.Size = new System.Drawing.Size(715, 23);
@@ -268,105 +273,94 @@ partial class PrincipalView
         // BarraFerramentasPrincipalTST
         // 
         BarraFerramentasPrincipalTST.BackColor = System.Drawing.SystemColors.ControlLight;
-        BarraFerramentasPrincipalTST.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { LogoLBL, toolStripSeparator1, ImportarMatriculasBTN, EnviarCertificadosBTN, toolStripSeparator2, ExportarRelatorioCBX });
+        BarraFerramentasPrincipalTST.Items.AddRange(new ToolStripItem[] { ImportarMatriculasBTN, EnviarCertificadosBTN, toolStripSeparator2, ExportarRelatorioCBX });
         BarraFerramentasPrincipalTST.Location = new System.Drawing.Point(5, 5);
         BarraFerramentasPrincipalTST.Name = "BarraFerramentasPrincipalTST";
-        BarraFerramentasPrincipalTST.Size = new System.Drawing.Size(859, 33);
+        BarraFerramentasPrincipalTST.Size = new System.Drawing.Size(859, 25);
         BarraFerramentasPrincipalTST.TabIndex = 3;
         BarraFerramentasPrincipalTST.Text = "toolStrip1";
-        // 
-        // LogoLBL
-        // 
-        LogoLBL.AutoSize = false;
-        LogoLBL.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-        LogoLBL.Name = "LogoLBL";
-        LogoLBL.Size = new System.Drawing.Size(86, 30);
-        // 
-        // toolStripSeparator1
-        // 
-        toolStripSeparator1.Name = "toolStripSeparator1";
-        toolStripSeparator1.Size = new System.Drawing.Size(6, 33);
         // 
         // ImportarMatriculasBTN
         // 
         ImportarMatriculasBTN.Image = Properties.Resources.ImportarVerde;
         ImportarMatriculasBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
         ImportarMatriculasBTN.Name = "ImportarMatriculasBTN";
-        ImportarMatriculasBTN.Size = new System.Drawing.Size(131, 30);
+        ImportarMatriculasBTN.Size = new System.Drawing.Size(131, 22);
         ImportarMatriculasBTN.Text = "Importar Matrículas";
-        ImportarMatriculasBTN.Click += this.ImportarMatriculasBTN_Click;
+        ImportarMatriculasBTN.Click += ImportarMatriculasBTN_Click;
         // 
         // EnviarCertificadosBTN
         // 
         EnviarCertificadosBTN.Image = Properties.Resources.EmailVerde;
         EnviarCertificadosBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
         EnviarCertificadosBTN.Name = "EnviarCertificadosBTN";
-        EnviarCertificadosBTN.Size = new System.Drawing.Size(125, 30);
+        EnviarCertificadosBTN.Size = new System.Drawing.Size(125, 22);
         EnviarCertificadosBTN.Text = "Enviar Certificados";
+        EnviarCertificadosBTN.Click += EnviarCertificadosBTN_Click;
         // 
         // toolStripSeparator2
         // 
         toolStripSeparator2.Name = "toolStripSeparator2";
-        toolStripSeparator2.Size = new System.Drawing.Size(6, 33);
+        toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
         // 
         // ExportarRelatorioCBX
         // 
-        ExportarRelatorioCBX.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { PdfBTN, XlsxBTN });
+        ExportarRelatorioCBX.DropDownItems.AddRange(new ToolStripItem[] { PdfBTN, XlsxBTN });
         ExportarRelatorioCBX.Image = Properties.Resources.RelatorioVerde;
         ExportarRelatorioCBX.ImageTransparentColor = System.Drawing.Color.Magenta;
         ExportarRelatorioCBX.Name = "ExportarRelatorioCBX";
-        ExportarRelatorioCBX.Size = new System.Drawing.Size(130, 30);
+        ExportarRelatorioCBX.Size = new System.Drawing.Size(130, 22);
         ExportarRelatorioCBX.Text = "Exportar Relatório";
         // 
         // PdfBTN
         // 
         PdfBTN.Name = "PdfBTN";
-        PdfBTN.Size = new System.Drawing.Size(180, 22);
+        PdfBTN.Size = new System.Drawing.Size(100, 22);
         PdfBTN.Text = "PDF";
         // 
         // XlsxBTN
         // 
         XlsxBTN.Name = "XlsxBTN";
-        XlsxBTN.Size = new System.Drawing.Size(180, 22);
+        XlsxBTN.Size = new System.Drawing.Size(100, 22);
         XlsxBTN.Text = "XLSX";
         // 
         // PrincipalView
         // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(869, 691);
-        this.Controls.Add(MatriculasGBX);
-        this.Controls.Add(InformacoesGBX);
-        this.Controls.Add(BarraFerramentasPrincipalTST);
-        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-        this.MaximizeBox = false;
-        this.Name = "PrincipalView";
-        this.Padding = new System.Windows.Forms.Padding(5);
-        this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-        this.Text = "PrincipalView";
-        this.Activated += this.PrincipalView_Activated;
-        this.Load += this.PrincipalView_Load;
+        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new System.Drawing.Size(869, 691);
+        Controls.Add(MatriculasGBX);
+        Controls.Add(InformacoesGBX);
+        Controls.Add(BarraFerramentasPrincipalTST);
+        FormBorderStyle = FormBorderStyle.FixedDialog;
+        Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+        MaximizeBox = false;
+        Name = "PrincipalView";
+        Padding = new Padding(5);
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "CertFlow - Fluxo de Preparação e Envio de Certificados Digitais";
+        Activated += PrincipalView_Activated;
         ((System.ComponentModel.ISupportInitialize)MatriculasSelecionadasDGV).EndInit();
         MatriculasGBX.ResumeLayout(false);
         MatriculasGBX.PerformLayout();
-        BarraStatusFeedback.ResumeLayout(false);
-        BarraStatusFeedback.PerformLayout();
+        PainelOpcoesPNL.ResumeLayout(false);
+        PainelOpcoesPNL.PerformLayout();
         BarraFerramentasMatriculasTST.ResumeLayout(false);
         BarraFerramentasMatriculasTST.PerformLayout();
+        BarraStatusFeedback.ResumeLayout(false);
+        BarraStatusFeedback.PerformLayout();
         InformacoesGBX.ResumeLayout(false);
         InformacoesGBX.PerformLayout();
         BarraFerramentasPrincipalTST.ResumeLayout(false);
         BarraFerramentasPrincipalTST.PerformLayout();
-        this.ResumeLayout(false);
-        this.PerformLayout();
+        ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion
     private GroupBox MatriculasGBX;
     private GroupBox InformacoesGBX;
     private ToolStrip BarraFerramentasPrincipalTST;
-    private ToolStripLabel LogoLBL;
-    private ToolStripSeparator toolStripSeparator1;
     private ToolStripButton ImportarMatriculasBTN;
     private ToolStripButton EnviarCertificadosBTN;
     private ToolStripSeparator toolStripSeparator2;
@@ -389,6 +383,6 @@ partial class PrincipalView
     private TextBox EmailTXT;
     private Label EmailLBL;
     public DataGridView MatriculasSelecionadasDGV;
-    private ToolStripButton ErroBTN;
-    private ToolStripButton CertificadoBTN;
+    private Panel PainelOpcoesPNL;
+    private CheckBox ApenasComCertificadosCHK;
 }

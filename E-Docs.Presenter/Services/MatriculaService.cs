@@ -1,4 +1,5 @@
-﻿using E_Docs.Presenter.DTOs;
+﻿using E_Docs.Domain.Entities;
+using E_Docs.Presenter.DTOs;
 using E_Docs.Presenter.Mappings;
 using System.Data;
 
@@ -15,7 +16,15 @@ public static class MatriculaService
         var retorno = Domain.Services.MatriculaService.CarregarMatriculas(diretorio, senhaAdmin);
         var matriculasDTO = MatriculaMap.ConverterListaMatriculasParaListaMatriculasDto(retorno.matriculas);
         DataTable dt = MatriculaMap.ConverterListaDtoParaDataTable(matriculasDTO);
-        var certificadosDTO = CertificadoMap.ConverterListaCertificadosParaListaCertificadosDto(retorno.certificados);
+        
+        List<Certificado> certificados = [];
+
+        foreach (var certificado in retorno.certificados)
+        {
+            certificado.Matricula = retorno.matriculas.FirstOrDefault(x => x.Nome.Equals(certificado.NomeAluno));
+            if(certificado.Matricula != null) certificados.Add(certificado);
+        }
+        var certificadosDTO = CertificadoMap.ConverterListaCertificadosParaListaCertificadosDto(certificados);
         return (dt,matriculasDTO, certificadosDTO);
     }
 }

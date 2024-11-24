@@ -90,7 +90,7 @@ public static class MatriculaMap
         dt.Columns.Add("Email", typeof(string));
         dt.Columns.Add("Curso", typeof(string));
         dt.Columns.Add("Turma", typeof(string));
-        dt.Columns.Add("Unidade", typeof(string));
+        //dt.Columns.Add("Unidade", typeof(string));
 
         // Adicionar linhas com os dados da lista
         foreach (var matricula in matriculas)

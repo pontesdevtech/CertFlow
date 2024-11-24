@@ -11,7 +11,7 @@ public class EmailDTO
     /// <param name="corpoEmail">Texto do corpo do texto</param>
     /// <param name="anexos">Lista de anxos a serem enviados no texto</param>
     /// <param name="servidorEmail">Informações do provedor e do usuário remetente</param>
-    public EmailDTO(List<string> emailsDestinatario, List<string>? emailsEmCopia, List<string>? emailsEmCopiaOculta, string assunto, string corpoEmail, List<string> anexos, ServidorEmailDTO servidorEmail)
+    public EmailDTO(List<string> emailsDestinatario, List<string>? emailsEmCopia, List<string>? emailsEmCopiaOculta, string assunto, string corpoEmail, List<string> anexos, ServidorEmailDTO servidorEmail, MatriculaDTO? matricula = null)
     {
         EmailsDestinatario = emailsDestinatario;
         EmailsEmCopia = emailsEmCopia;
@@ -20,6 +20,7 @@ public class EmailDTO
         CorpoEmail = corpoEmail;
         Anexos = anexos;
         ServidorEmail = servidorEmail;
+        Matricula = matricula;
     }
 
     // Atributos da classe
@@ -30,4 +31,6 @@ public class EmailDTO
     public string CorpoEmail { get; set; }
     public List<string> Anexos { get; set; }
     public ServidorEmailDTO ServidorEmail { get; set; }
+    // Associações
+    public MatriculaDTO? Matricula { get; set; }
 }

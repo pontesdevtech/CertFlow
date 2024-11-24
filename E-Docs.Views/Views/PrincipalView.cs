@@ -1,8 +1,13 @@
+using E_Docs.Domain.Entities;
+using E_Docs.Presenter.DTOs;
+using E_Docs.Presenter.Mappings;
 using E_Docs.Views.Common;
 using E_Docs.Views.Views;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace E_Docs.Views;
@@ -10,6 +15,15 @@ namespace E_Docs.Views;
 public partial class PrincipalView : Form
 {
     public DataTable Dt { get; set; } = new DataTable();
+    public List<CertificadoDTO> Certificados = [];
+    public List<MatriculaDTO> Matriculas = [];
+
+    public readonly string Provedor = "smtp.office365.com";
+    public readonly int Porta = 587;
+    public string Usuario { get; set; } = string.Empty;
+    public string Cc { get; set; } = string.Empty;
+    public string Cco { get; set; } = string.Empty;
+    public string Mensagem { get; set; } = string.Empty;
 
     public PrincipalView()
     {
@@ -22,37 +36,53 @@ public partial class PrincipalView : Form
         importarMatriculas.ShowDialog();
     }
 
-    private void PrincipalView_Load(object sender, EventArgs e)
+    private void EnviarCertificadosBTN_Click(object sender, EventArgs e)
     {
+        EnviarCertificadosView enviarCertificados = new(this, Certificados);
 
+        List<MatriculaDTO> matriculas = [];
+        foreach (DataGridViewRow row in MatriculasSelecionadasDGV.Rows)
+        {
+            var certificado = Certificados.FirstOrDefault(x => x.Matricula.Aluno.Equals(row.Cells["Aluno"].Value));
+            if (certificado != null && row.Cells["[X]"].Value is true)
+            {
+                matriculas.Add(certificado.Matricula);
+            }
+        }
+
+        Auxiliares.FiltrarMatriculas(true, enviarCertificados.EmailsDGV, matriculas, Certificados, enviarCertificados.FeedbackLBL);
+
+        enviarCertificados.EmailsDGV.DataSource = matriculas;
+        FormatacaoCommon.FormatarDgv(enviarCertificados.EmailsDGV);
+
+        enviarCertificados.ShowDialog();
     }
 
     private void PrincipalView_Activated(object sender, EventArgs e)
     {
         MatriculasSelecionadasDGV.DataSource = Dt;
 
-        //if (MatriculasSelecionadasDGV.Rows.Count > 0)
-        //{
-        //    Formatacao.FormatarDgv(MatriculasSelecionadasDGV);
-        //}
-
         foreach (DataGridViewRow linha in MatriculasSelecionadasDGV.Rows)
         {
             linha.Cells["[X]"].Value = false;
         }
 
+        EnviarCertificadosBTN.Enabled = MatriculasSelecionadasDGV.Rows.Count > 0 ? true : false;
+
         FeedbackLBL.Text = Auxiliares.ContarRegistros(MatriculasSelecionadasDGV).feedback;
-    }
+        int count = MatriculasSelecionadasDGV.Rows.Cast<DataGridViewRow>()
+                    .Count(linha => !linha.IsNewRow &&
+                    Convert.ToBoolean(linha.Cells["[X]"].Value) &&
+                    !string.IsNullOrEmpty(linha.Cells["Unidade"].Value?.ToString()));
 
-    private void NovoBTN_Click(object sender, EventArgs e)
-    {
-
+        EnviarCertificadosBTN.Enabled = count > 0 ? true : false;
+        if (MatriculasSelecionadasDGV.Columns.Contains("[X]")) MatriculasSelecionadasDGV.Columns["[X]"].Frozen = true;
     }
 
     private void MatriculasSelecionadasDGV_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
     {
         // Verificar se o clique foi na coluna de CheckBox (por exemplo, na coluna com índice 0)
-        if (e.ColumnIndex == 6)
+        if (e.ColumnIndex == MatriculasSelecionadasDGV.Columns["[X]"].Index)
         {
             int linhasMarcadas = Auxiliares.ContarRegistros(MatriculasSelecionadasDGV).selecionados;
 
@@ -88,6 +118,12 @@ public partial class PrincipalView : Form
 
         }
         FeedbackLBL.Text = Auxiliares.ContarRegistros(MatriculasSelecionadasDGV).feedback;
+        int count = MatriculasSelecionadasDGV.Rows.Cast<DataGridViewRow>()
+                    .Count(linha => !linha.IsNewRow &&
+                    Convert.ToBoolean(linha.Cells["[X]"].Value) &&
+                    !string.IsNullOrEmpty(linha.Cells["Unidade"].Value?.ToString()));
+
+        EnviarCertificadosBTN.Enabled = count > 0 ? true : false;
     }
 
     private void MatriculasSelecionadasDGV_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -126,6 +162,12 @@ public partial class PrincipalView : Form
                 // Forçar o DataGridView a atualizar a célula imediatamente
                 MatriculasSelecionadasDGV.EndEdit();
                 FeedbackLBL.Text = Auxiliares.ContarRegistros(MatriculasSelecionadasDGV).feedback;
+                int count = MatriculasSelecionadasDGV.Rows.Cast<DataGridViewRow>()
+                    .Count(linha => !linha.IsNewRow &&
+                    Convert.ToBoolean(linha.Cells["[X]"].Value) &&
+                    !string.IsNullOrEmpty(linha.Cells["Unidade"].Value?.ToString()));
+
+                EnviarCertificadosBTN.Enabled = count > 0 ? true : false;
             }
         }
     }
@@ -138,5 +180,13 @@ public partial class PrincipalView : Form
         AlunoTXT.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["Aluno"].Value.ToString();
         CpfTXT.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["CPF"].Value.ToString();
         EmailTXT.Text = MatriculasSelecionadasDGV.Rows[linha].Cells["Email"].Value.ToString();
+
+        MatriculasSelecionadasDGV.Enabled = MatriculasSelecionadasDGV.Rows.Count > 0 ? true : false;
+    }
+
+    private void ApenasComCertificadosCHK_CheckedChanged(object sender, EventArgs e)
+    {
+        Auxiliares.FiltrarMatriculas(ApenasComCertificadosCHK.Checked, MatriculasSelecionadasDGV, Matriculas, Certificados, FeedbackLBL);
+        if (MatriculasSelecionadasDGV.Columns.Contains("[X]")) MatriculasSelecionadasDGV.Columns["[X]"].Frozen = true;
     }
 }

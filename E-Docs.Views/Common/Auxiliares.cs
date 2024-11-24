@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace E_Docs.Views.Common;
 public static class Auxiliares
 {
-    public static void FiltrarMatriculas(CheckBox chk, DataGridView dgv, List<MatriculaDTO> matriculasDto, List<CertificadoDTO> certificadosDto, ToolStripLabel feedback)
+    public static void FiltrarMatriculas(bool filtrar, DataGridView dgv, List<MatriculaDTO> matriculasDto, List<CertificadoDTO> certificadosDto, ToolStripLabel feedback)
     {
         List<MatriculaDTO> filtroDto = [];
 
@@ -17,7 +17,7 @@ public static class Auxiliares
         }
 
         // Configurar exibição dos dados no datagridview
-        if (chk.Checked)
+        if (filtrar)
         {
             dgv.DataSource = MatriculaMap.ConverterListaDtoParaDataTable(filtroDto);
         }
@@ -27,6 +27,7 @@ public static class Auxiliares
         }
         FormatacaoCommon.FormatarDgv(dgv);
         IdentificarMatriculasComCertificado(dgv, certificadosDto);
+        IdentificarEmailsEnviados(dgv, new());
         feedback.Text = ContarRegistros(dgv).feedback;
     }
 
@@ -59,4 +60,23 @@ public static class Auxiliares
             }
         }
     }
+
+    public static void IdentificarEmailsEnviados(DataGridView dgv, List<EmailDTO> emails)
+    {
+        foreach (DataGridViewRow row in dgv.Rows)
+        {
+            string? aluno = row.Cells["Aluno"].Value.ToString();
+            if (emails.FirstOrDefault(x => x.Matricula.Aluno.Equals(aluno)) != null)
+            {
+                row.Cells["Envio"].Value = Properties.Resources.EmailVerde;
+            }
+            else
+            {
+                row.Cells["Envio"].Value = Properties.Resources.PendenteVermelho;
+
+            }
+        }
+    }
+
+    public static string InserirTag(string opcao) => $"[{opcao}]";
 }

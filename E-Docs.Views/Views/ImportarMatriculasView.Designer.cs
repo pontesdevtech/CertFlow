@@ -30,28 +30,28 @@ partial class ImportarMatriculasView
     /// </summary>
     private void InitializeComponent()
     {
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-        System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-        OrietacaoImportacaoLBL = new System.Windows.Forms.Label();
-        ImagemSelecaoArquivoIMG = new System.Windows.Forms.PictureBox();
-        OrientacoesGBX = new System.Windows.Forms.GroupBox();
-        ImportacaoGBX = new System.Windows.Forms.GroupBox();
-        MatriculasGBX = new System.Windows.Forms.GroupBox();
-        MatriculasDGV = new System.Windows.Forms.DataGridView();
-        PainelOpcoesPNL = new System.Windows.Forms.Panel();
-        ApenasComCertificadosCHK = new System.Windows.Forms.CheckBox();
-        panel1 = new System.Windows.Forms.Panel();
-        DiretorioMatriculasLBL = new System.Windows.Forms.Label();
-        DiretorioMatriculasTXT = new System.Windows.Forms.TextBox();
-        ImportarCertificadosBTN = new System.Windows.Forms.Button();
-        DiretorioCertificadosTXT = new System.Windows.Forms.TextBox();
-        ImportarMatriculasBTN = new System.Windows.Forms.Button();
-        DiretorioCertificadosLBL = new System.Windows.Forms.Label();
-        BarraFerramentasTST = new System.Windows.Forms.ToolStrip();
-        CancelarBTN = new System.Windows.Forms.ToolStripButton();
-        ConfirmarBTN = new System.Windows.Forms.ToolStripButton();
-        FeedbackLBL = new System.Windows.Forms.ToolStripLabel();
+        DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+        DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+        OrietacaoImportacaoLBL = new Label();
+        ImagemSelecaoArquivoIMG = new PictureBox();
+        OrientacoesGBX = new GroupBox();
+        ImportacaoGBX = new GroupBox();
+        MatriculasGBX = new GroupBox();
+        MatriculasDGV = new DataGridView();
+        PainelOpcoesPNL = new Panel();
+        ApenasComCertificadosCHK = new CheckBox();
+        panel1 = new Panel();
+        DiretorioMatriculasLBL = new Label();
+        DiretorioMatriculasTXT = new TextBox();
+        ImportarCertificadosBTN = new Button();
+        DiretorioCertificadosTXT = new TextBox();
+        ImportarMatriculasBTN = new Button();
+        DiretorioCertificadosLBL = new Label();
+        BarraFerramentasTST = new ToolStrip();
+        CancelarBTN = new ToolStripButton();
+        ConfirmarBTN = new ToolStripButton();
+        FeedbackLBL = new ToolStripLabel();
         ((System.ComponentModel.ISupportInitialize)ImagemSelecaoArquivoIMG).BeginInit();
         OrientacoesGBX.SuspendLayout();
         ImportacaoGBX.SuspendLayout();
@@ -60,14 +60,14 @@ partial class ImportarMatriculasView
         PainelOpcoesPNL.SuspendLayout();
         panel1.SuspendLayout();
         BarraFerramentasTST.SuspendLayout();
-        this.SuspendLayout();
+        SuspendLayout();
         // 
         // OrietacaoImportacaoLBL
         // 
-        OrietacaoImportacaoLBL.Dock = System.Windows.Forms.DockStyle.Fill;
+        OrietacaoImportacaoLBL.Dock = DockStyle.Fill;
         OrietacaoImportacaoLBL.Location = new System.Drawing.Point(105, 21);
         OrietacaoImportacaoLBL.Name = "OrietacaoImportacaoLBL";
-        OrietacaoImportacaoLBL.Padding = new System.Windows.Forms.Padding(10);
+        OrietacaoImportacaoLBL.Padding = new Padding(10);
         OrietacaoImportacaoLBL.Size = new System.Drawing.Size(545, 96);
         OrietacaoImportacaoLBL.TabIndex = 0;
         OrietacaoImportacaoLBL.Text = "Selecione o local onde estão armazenados a lista de matrículados e os Certificados para ajuste e envio.";
@@ -76,12 +76,12 @@ partial class ImportarMatriculasView
         // ImagemSelecaoArquivoIMG
         // 
         ImagemSelecaoArquivoIMG.BackColor = System.Drawing.SystemColors.ControlLight;
-        ImagemSelecaoArquivoIMG.Dock = System.Windows.Forms.DockStyle.Left;
-        ImagemSelecaoArquivoIMG.Image = Properties.Resources.ImportarCinza;
+        ImagemSelecaoArquivoIMG.Dock = DockStyle.Left;
+        ImagemSelecaoArquivoIMG.Image = Properties.Resources.ImportarVerde;
         ImagemSelecaoArquivoIMG.Location = new System.Drawing.Point(5, 21);
         ImagemSelecaoArquivoIMG.Name = "ImagemSelecaoArquivoIMG";
         ImagemSelecaoArquivoIMG.Size = new System.Drawing.Size(100, 96);
-        ImagemSelecaoArquivoIMG.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+        ImagemSelecaoArquivoIMG.SizeMode = PictureBoxSizeMode.Zoom;
         ImagemSelecaoArquivoIMG.TabIndex = 1;
         ImagemSelecaoArquivoIMG.TabStop = false;
         // 
@@ -90,10 +90,10 @@ partial class ImportarMatriculasView
         OrientacoesGBX.BackColor = System.Drawing.SystemColors.ControlLight;
         OrientacoesGBX.Controls.Add(OrietacaoImportacaoLBL);
         OrientacoesGBX.Controls.Add(ImagemSelecaoArquivoIMG);
-        OrientacoesGBX.Dock = System.Windows.Forms.DockStyle.Top;
+        OrientacoesGBX.Dock = DockStyle.Top;
         OrientacoesGBX.Location = new System.Drawing.Point(5, 5);
         OrientacoesGBX.Name = "OrientacoesGBX";
-        OrientacoesGBX.Padding = new System.Windows.Forms.Padding(5);
+        OrientacoesGBX.Padding = new Padding(5);
         OrientacoesGBX.Size = new System.Drawing.Size(655, 122);
         OrientacoesGBX.TabIndex = 2;
         OrientacoesGBX.TabStop = false;
@@ -103,7 +103,7 @@ partial class ImportarMatriculasView
         // 
         ImportacaoGBX.Controls.Add(MatriculasGBX);
         ImportacaoGBX.Controls.Add(panel1);
-        ImportacaoGBX.Dock = System.Windows.Forms.DockStyle.Fill;
+        ImportacaoGBX.Dock = DockStyle.Fill;
         ImportacaoGBX.Location = new System.Drawing.Point(5, 127);
         ImportacaoGBX.Name = "ImportacaoGBX";
         ImportacaoGBX.Size = new System.Drawing.Size(655, 462);
@@ -115,7 +115,7 @@ partial class ImportarMatriculasView
         // 
         MatriculasGBX.Controls.Add(MatriculasDGV);
         MatriculasGBX.Controls.Add(PainelOpcoesPNL);
-        MatriculasGBX.Dock = System.Windows.Forms.DockStyle.Fill;
+        MatriculasGBX.Dock = DockStyle.Fill;
         MatriculasGBX.Location = new System.Drawing.Point(3, 110);
         MatriculasGBX.Name = "MatriculasGBX";
         MatriculasGBX.Size = new System.Drawing.Size(649, 349);
@@ -128,65 +128,65 @@ partial class ImportarMatriculasView
         MatriculasDGV.AllowUserToAddRows = false;
         MatriculasDGV.AllowUserToDeleteRows = false;
         MatriculasDGV.BackgroundColor = System.Drawing.SystemColors.Control;
-        MatriculasDGV.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+        MatriculasDGV.BorderStyle = BorderStyle.Fixed3D;
+        dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
         dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
         dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
         dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
         dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Control;
         dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.WindowText;
-        dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
         MatriculasDGV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-        MatriculasDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-        dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        MatriculasDGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+        dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
         dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F);
         dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
         dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.DeepSkyBlue;
         dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+        dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
         MatriculasDGV.DefaultCellStyle = dataGridViewCellStyle2;
-        MatriculasDGV.Dock = System.Windows.Forms.DockStyle.Fill;
+        MatriculasDGV.Dock = DockStyle.Fill;
         MatriculasDGV.Location = new System.Drawing.Point(3, 44);
         MatriculasDGV.Name = "MatriculasDGV";
         MatriculasDGV.ReadOnly = true;
-        dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+        dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
         dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
         dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F);
         dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
         dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.DodgerBlue;
         dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-        dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+        dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
         MatriculasDGV.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
         MatriculasDGV.RowHeadersVisible = false;
         MatriculasDGV.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
         MatriculasDGV.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White;
-        MatriculasDGV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+        MatriculasDGV.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         MatriculasDGV.Size = new System.Drawing.Size(643, 302);
         MatriculasDGV.TabIndex = 7;
-        MatriculasDGV.CellClick += this.MatriculasDGV_CellClick;
-        MatriculasDGV.ColumnHeaderMouseClick += this.MatriculasDGV_ColumnHeaderMouseClick;
+        MatriculasDGV.CellClick += MatriculasDGV_CellClick;
+        MatriculasDGV.ColumnHeaderMouseClick += MatriculasDGV_ColumnHeaderMouseClick;
         // 
         // PainelOpcoesPNL
         // 
         PainelOpcoesPNL.Controls.Add(ApenasComCertificadosCHK);
-        PainelOpcoesPNL.Dock = System.Windows.Forms.DockStyle.Top;
+        PainelOpcoesPNL.Dock = DockStyle.Top;
         PainelOpcoesPNL.Location = new System.Drawing.Point(3, 19);
         PainelOpcoesPNL.Name = "PainelOpcoesPNL";
-        PainelOpcoesPNL.Padding = new System.Windows.Forms.Padding(10, 0, 0, 0);
+        PainelOpcoesPNL.Padding = new Padding(10, 0, 0, 0);
         PainelOpcoesPNL.Size = new System.Drawing.Size(643, 25);
         PainelOpcoesPNL.TabIndex = 8;
         // 
         // ApenasComCertificadosCHK
         // 
-        ApenasComCertificadosCHK.Dock = System.Windows.Forms.DockStyle.Left;
+        ApenasComCertificadosCHK.Dock = DockStyle.Left;
         ApenasComCertificadosCHK.Location = new System.Drawing.Point(10, 0);
         ApenasComCertificadosCHK.Name = "ApenasComCertificadosCHK";
         ApenasComCertificadosCHK.Size = new System.Drawing.Size(251, 25);
         ApenasComCertificadosCHK.TabIndex = 0;
         ApenasComCertificadosCHK.Text = "Exibir apenas matriculas com Certificados";
         ApenasComCertificadosCHK.UseVisualStyleBackColor = true;
-        ApenasComCertificadosCHK.CheckedChanged += this.ApenasComCertificadosCHK_CheckedChanged;
+        ApenasComCertificadosCHK.CheckedChanged += ApenasComCertificadosCHK_CheckedChanged;
         // 
         // panel1
         // 
@@ -196,7 +196,7 @@ partial class ImportarMatriculasView
         panel1.Controls.Add(DiretorioCertificadosTXT);
         panel1.Controls.Add(ImportarMatriculasBTN);
         panel1.Controls.Add(DiretorioCertificadosLBL);
-        panel1.Dock = System.Windows.Forms.DockStyle.Top;
+        panel1.Dock = DockStyle.Top;
         panel1.Location = new System.Drawing.Point(3, 19);
         panel1.Name = "panel1";
         panel1.Size = new System.Drawing.Size(649, 91);
@@ -213,29 +213,29 @@ partial class ImportarMatriculasView
         // 
         // DiretorioMatriculasTXT
         // 
-        DiretorioMatriculasTXT.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+        DiretorioMatriculasTXT.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         DiretorioMatriculasTXT.Location = new System.Drawing.Point(4, 18);
         DiretorioMatriculasTXT.Name = "DiretorioMatriculasTXT";
         DiretorioMatriculasTXT.ReadOnly = true;
         DiretorioMatriculasTXT.Size = new System.Drawing.Size(613, 23);
         DiretorioMatriculasTXT.TabIndex = 0;
-        DiretorioMatriculasTXT.TextChanged += this.DiretorioMatriculasTXT_TextChanged;
+        DiretorioMatriculasTXT.TextChanged += DiretorioMatriculasTXT_TextChanged;
         // 
         // ImportarCertificadosBTN
         // 
-        ImportarCertificadosBTN.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        ImportarCertificadosBTN.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         ImportarCertificadosBTN.BackgroundImage = Properties.Resources.ProcurarVerde;
-        ImportarCertificadosBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+        ImportarCertificadosBTN.BackgroundImageLayout = ImageLayout.Zoom;
         ImportarCertificadosBTN.Location = new System.Drawing.Point(617, 61);
         ImportarCertificadosBTN.Name = "ImportarCertificadosBTN";
         ImportarCertificadosBTN.Size = new System.Drawing.Size(26, 25);
         ImportarCertificadosBTN.TabIndex = 5;
         ImportarCertificadosBTN.UseVisualStyleBackColor = true;
-        ImportarCertificadosBTN.Click += this.ImportarCertificadosBTN_Click;
+        ImportarCertificadosBTN.Click += ImportarCertificadosBTN_Click;
         // 
         // DiretorioCertificadosTXT
         // 
-        DiretorioCertificadosTXT.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+        DiretorioCertificadosTXT.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         DiretorioCertificadosTXT.Location = new System.Drawing.Point(4, 62);
         DiretorioCertificadosTXT.Name = "DiretorioCertificadosTXT";
         DiretorioCertificadosTXT.ReadOnly = true;
@@ -244,15 +244,15 @@ partial class ImportarMatriculasView
         // 
         // ImportarMatriculasBTN
         // 
-        ImportarMatriculasBTN.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+        ImportarMatriculasBTN.Anchor = AnchorStyles.Top | AnchorStyles.Right;
         ImportarMatriculasBTN.BackgroundImage = Properties.Resources.ProcurarVerde;
-        ImportarMatriculasBTN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+        ImportarMatriculasBTN.BackgroundImageLayout = ImageLayout.Zoom;
         ImportarMatriculasBTN.Location = new System.Drawing.Point(617, 17);
         ImportarMatriculasBTN.Name = "ImportarMatriculasBTN";
         ImportarMatriculasBTN.Size = new System.Drawing.Size(26, 25);
         ImportarMatriculasBTN.TabIndex = 4;
         ImportarMatriculasBTN.UseVisualStyleBackColor = true;
-        ImportarMatriculasBTN.Click += this.ImportarMatriculasBTN_Click;
+        ImportarMatriculasBTN.Click += ImportarMatriculasBTN_Click;
         // 
         // DiretorioCertificadosLBL
         // 
@@ -265,8 +265,8 @@ partial class ImportarMatriculasView
         // 
         // BarraFerramentasTST
         // 
-        BarraFerramentasTST.Dock = System.Windows.Forms.DockStyle.Bottom;
-        BarraFerramentasTST.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { CancelarBTN, ConfirmarBTN, FeedbackLBL });
+        BarraFerramentasTST.Dock = DockStyle.Bottom;
+        BarraFerramentasTST.Items.AddRange(new ToolStripItem[] { CancelarBTN, ConfirmarBTN, FeedbackLBL });
         BarraFerramentasTST.Location = new System.Drawing.Point(5, 589);
         BarraFerramentasTST.Name = "BarraFerramentasTST";
         BarraFerramentasTST.Size = new System.Drawing.Size(655, 25);
@@ -275,23 +275,23 @@ partial class ImportarMatriculasView
         // 
         // CancelarBTN
         // 
-        CancelarBTN.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+        CancelarBTN.Alignment = ToolStripItemAlignment.Right;
         CancelarBTN.Image = Properties.Resources.CancelarVermelho;
         CancelarBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
         CancelarBTN.Name = "CancelarBTN";
         CancelarBTN.Size = new System.Drawing.Size(73, 22);
         CancelarBTN.Text = "Cancelar";
-        CancelarBTN.Click += this.CancelarBTN_Click;
+        CancelarBTN.Click += CancelarBTN_Click;
         // 
         // ConfirmarBTN
         // 
-        ConfirmarBTN.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+        ConfirmarBTN.Alignment = ToolStripItemAlignment.Right;
         ConfirmarBTN.Image = Properties.Resources.ConfirmarVerde;
         ConfirmarBTN.ImageTransparentColor = System.Drawing.Color.Magenta;
         ConfirmarBTN.Name = "ConfirmarBTN";
         ConfirmarBTN.Size = new System.Drawing.Size(81, 22);
         ConfirmarBTN.Text = "Confirmar";
-        ConfirmarBTN.Click += this.ConfirmarBTN_Click;
+        ConfirmarBTN.Click += ConfirmarBTN_Click;
         // 
         // FeedbackLBL
         // 
@@ -301,18 +301,18 @@ partial class ImportarMatriculasView
         // 
         // ImportarMatriculasView
         // 
-        this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-        this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-        this.ClientSize = new System.Drawing.Size(665, 619);
-        this.Controls.Add(ImportacaoGBX);
-        this.Controls.Add(OrientacoesGBX);
-        this.Controls.Add(BarraFerramentasTST);
-        this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-        this.Name = "ImportarMatriculasView";
-        this.Padding = new System.Windows.Forms.Padding(5);
-        this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-        this.Text = "ImportarMatriculasView";
-        this.Load += this.ImportarMatriculasView_Load;
+        AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+        AutoScaleMode = AutoScaleMode.Font;
+        ClientSize = new System.Drawing.Size(665, 619);
+        Controls.Add(ImportacaoGBX);
+        Controls.Add(OrientacoesGBX);
+        Controls.Add(BarraFerramentasTST);
+        FormBorderStyle = FormBorderStyle.FixedToolWindow;
+        Name = "ImportarMatriculasView";
+        Padding = new Padding(5);
+        StartPosition = FormStartPosition.CenterScreen;
+        Text = "CertFlow - Importar Matriculas";
+        Activated += ImportarMatriculasView_Activated;
         ((System.ComponentModel.ISupportInitialize)ImagemSelecaoArquivoIMG).EndInit();
         OrientacoesGBX.ResumeLayout(false);
         ImportacaoGBX.ResumeLayout(false);
@@ -323,8 +323,8 @@ partial class ImportarMatriculasView
         panel1.PerformLayout();
         BarraFerramentasTST.ResumeLayout(false);
         BarraFerramentasTST.PerformLayout();
-        this.ResumeLayout(false);
-        this.PerformLayout();
+        ResumeLayout(false);
+        PerformLayout();
     }
 
     #endregion

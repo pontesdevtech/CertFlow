@@ -193,7 +193,7 @@ partial class ExcecoesView
         FormBorderStyle = FormBorderStyle.FixedToolWindow;
         Name = "ExcecoesView";
         StartPosition = FormStartPosition.CenterScreen;
-        Text = "Erro ao executar o processo";
+        Text = "CertFlow - Erro no Processo";
         ExcecaoGBX.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)ImagemExcecaoIMG).EndInit();
         ResumoExcecaoGBX.ResumeLayout(false);

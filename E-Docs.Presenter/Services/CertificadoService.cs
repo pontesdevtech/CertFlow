@@ -1,4 +1,5 @@
-﻿using E_Docs.Presenter.DTOs;
+﻿using E_Docs.Domain.Entities;
+using E_Docs.Presenter.DTOs;
 using E_Docs.Presenter.Mappings;
 
 namespace E_Docs.Presenter.Services;
@@ -13,7 +14,7 @@ public class CertificadoService
     /// <returns>Retorna um DataTable com as informações dos certificados</returns>
     public static List<CertificadoDTO> CarregarCertificados(string diretorio, string senhaAdmin, List<MatriculaDTO> matriculas)
     {
-        var certificados = Domain.Services.CertificadoService.RenomearCertificados(diretorio, senhaAdmin, MatriculaMap.ConverterListaMatriculasDtoParaListaMatriculas(matriculas));
+        var certificados = Domain.Services.CertificadoService.RenomearCertificados(diretorio, senhaAdmin, MatriculaMap.ConverterListaMatriculasDtoParaListaMatriculas(matriculas)) ?? new List<Certificado>();
         var certifcadosDto = CertificadoMap.ConverterListaCertificadosParaListaCertificadosDto(certificados);
         return certifcadosDto;
     }

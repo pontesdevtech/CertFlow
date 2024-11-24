@@ -6,7 +6,20 @@
     <RootNamespace>E_Docs.Views</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>Icone.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <Version>1.0.0</Version>
+    <PackageIcon>Icone.png</PackageIcon>
+    <RepositoryUrl>https://github.com/pontesdevtech/CertFlow</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/pontesdevtech/CertFlow</PackageProjectUrl>
+    <Product>CertFlow</Product>
+    <Company>PontesDevTech</Company>
+    <Authors>Tiago Pontes</Authors>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="Icone.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
